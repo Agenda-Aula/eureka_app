@@ -1,4 +1,4 @@
-import 'package:app/features/auth/data/models/user_auth_model.dart';
+import 'package:app/features/sign_up/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -7,36 +7,36 @@ class AuthDataSourceImp extends AuthDataSource {
   final googleSignIn = GoogleSignIn();
 
   @override
-  Future<UserAuthModel> createAccount(String email, String password) async {
+  Future<UserModel> createAccount(String email, String password) async {
     final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return UserAuthModel.mapFrom(authResult.user);
+    return UserModel.mapFrom(authResult.user);
   }
 
   @override
-  Future<UserAuthModel> currentUser() async {
+  Future<UserModel> currentUser() async {
     final firebaseUser = await _firebaseAuth.currentUser();
-    return UserAuthModel.mapFrom(firebaseUser);
+    return UserModel.mapFrom(firebaseUser);
   }
 
   @override
-  Stream<UserAuthModel> get onAuthStateChanged =>
+  Stream<UserModel> get onAuthStateChanged =>
       _firebaseAuth.onAuthStateChanged
-          .map((firebaseUser) => UserAuthModel.mapFrom(firebaseUser));
+          .map((firebaseUser) => UserModel.mapFrom(firebaseUser));
 
   @override
-  Future<UserAuthModel> signIn(String email, String password) async {
+  Future<UserModel> signIn(String email, String password) async {
     final authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return UserAuthModel.mapFrom(authResult.user);
+    return UserModel.mapFrom(authResult.user);
   }
 
   @override
-  Future<UserAuthModel> signInWithGoogle() async {
+  Future<UserModel> signInWithGoogle() async {
     final googleAccount = await googleSignIn.signIn();
     if (googleAccount != null) {
       final authResult = await _googleAuthResult();
-      return UserAuthModel.mapFrom(authResult.user);
+      return UserModel.mapFrom(authResult.user);
     }
     return null;
   }
@@ -66,15 +66,15 @@ class AuthDataSourceImp extends AuthDataSource {
 }
 
 abstract class AuthDataSource {
-  Future<UserAuthModel> createAccount(String email, String password);
+  Future<UserModel> createAccount(String email, String password);
 
-  Future<UserAuthModel> signIn(String email, String password);
+  Future<UserModel> signIn(String email, String password);
 
   Future<bool> signOut();
 
-  Future<UserAuthModel> signInWithGoogle();
+  Future<UserModel> signInWithGoogle();
 
-  Future<UserAuthModel> currentUser();
+  Future<UserModel> currentUser();
 
-  Stream<UserAuthModel> get onAuthStateChanged;
+  Stream<UserModel> get onAuthStateChanged;
 }

@@ -1,17 +1,16 @@
 import 'package:app/core/error/Failure.dart';
-import 'package:app/core/error/exceptions.dart';
-import 'package:app/features/auth/data/datasource/auth_data_source.dart';
-import 'package:app/features/auth/domain/entities/user_auth.dart';
-import 'package:app/features/auth/domain/repositories/user_auth_repository.dart';
+import 'package:app/features/sign_up/data/datasource/firebase_source.dart';
+import 'package:app/features/sign_up/domain/entities/register_user.dart';
+import 'package:app/features/sign_up/domain/repositories/sign_up_user_repository.dart';
 import 'package:dartz/dartz.dart';
 
-class UserAuthRepositoryImp extends UserAuthRepository {
+class RegisterUserRepositoryImp extends RegisterUserRepository {
   final AuthDataSource authDataSource;
 
-  UserAuthRepositoryImp({this.authDataSource});
+  RegisterUserRepositoryImp({this.authDataSource});
 
   @override
-  Future<Either<Failure, UserAuth>> createAccountRequest(
+  Future<Either<Failure, User>> createAccountRequest(
       String email, String password) async {
     final userAuth = await authDataSource.createAccount(email, password);
     if (userAuth != null) {
@@ -22,7 +21,7 @@ class UserAuthRepositoryImp extends UserAuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserAuth>> currentUserRequest() async {
+  Future<Either<Failure, User>> currentUserRequest() async {
     final userAuth = await authDataSource.currentUser();
     if (userAuth != null) {
       return Right(userAuth);
@@ -32,7 +31,7 @@ class UserAuthRepositoryImp extends UserAuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserAuth>> signInRequest(
+  Future<Either<Failure, User>> signInRequest(
       String email, String password) async {
     final userAuth = await authDataSource.signIn(email, password);
     if (userAuth != null) {
@@ -42,7 +41,7 @@ class UserAuthRepositoryImp extends UserAuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserAuth>> signInWithGoogleRequest() async {
+  Future<Either<Failure, User>> signInWithGoogleRequest() async {
     final userAuth = await authDataSource.signInWithGoogle();
     if (userAuth != null) {
       return Right(userAuth);
@@ -60,7 +59,7 @@ class UserAuthRepositoryImp extends UserAuthRepository {
   }
 
   @override
-  Either<Failure, Stream<UserAuth>> onAuthStateChanged() {
+  Either<Failure, Stream<User>> onAuthStateChanged() {
     final userAuth = authDataSource.onAuthStateChanged;
     if (userAuth != null) {
       return Right(userAuth);
