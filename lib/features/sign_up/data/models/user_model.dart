@@ -9,8 +9,12 @@ class UserModel extends User {
   UserModel({@required this.email, @required this.displayName})
       : super(email, displayName);
 
-  factory UserModel.mapFrom(FirebaseUser firebaseUser) {
-    return UserModel(
-        email: firebaseUser.email, displayName: firebaseUser.displayName);
-  }
+//  factory UserModel.mapFrom(FirebaseUser firebaseUser) {
+//    return UserModel(
+//        email: firebaseUser.email, displayName: firebaseUser.displayName);
+//  }
+}
+
+extension UserModelMapper on UserModel {
+  User get mapper => User(this.email, this.displayName);
 }

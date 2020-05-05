@@ -8,6 +8,7 @@ import 'package:equatable/equatable.dart';
 class RegisterUser implements UseCase<User, Params> {
   final RegisterUserRepository repository;
 
+
   RegisterUser({this.repository});
 
   @override

@@ -10,25 +10,28 @@ class AuthDataSourceImp extends AuthDataSource {
   Future<UserModel> createAccount(String email, String password) async {
     final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
-    return UserModel.mapFrom(authResult.user);
+    return UserModel(
+        email: authResult.user.email, displayName: authResult.user.displayName);
   }
 
   @override
   Future<UserModel> currentUser() async {
     final firebaseUser = await _firebaseAuth.currentUser();
-    return UserModel.mapFrom(firebaseUser);
+    return UserModel(
+        email: firebaseUser.email, displayName: firebaseUser.displayName);
   }
 
   @override
   Stream<UserModel> get onAuthStateChanged =>
-      _firebaseAuth.onAuthStateChanged
-          .map((firebaseUser) => UserModel.mapFrom(firebaseUser));
+      _firebaseAuth.onAuthStateChanged.map((firebaseUser) => UserModel(
+          email: firebaseUser.email, displayName: firebaseUser.displayName));
 
   @override
   Future<UserModel> signIn(String email, String password) async {
     final authResult = await _firebaseAuth.signInWithEmailAndPassword(
         email: email, password: password);
-    return UserModel.mapFrom(authResult.user);
+    return UserModel(
+        email: authResult.user.email, displayName: authResult.user.displayName);
   }
 
   @override
@@ -36,7 +39,9 @@ class AuthDataSourceImp extends AuthDataSource {
     final googleAccount = await googleSignIn.signIn();
     if (googleAccount != null) {
       final authResult = await _googleAuthResult();
-      return UserModel.mapFrom(authResult.user);
+      return UserModel(
+          email: authResult.user.email,
+          displayName: authResult.user.displayName);
     }
     return null;
   }
