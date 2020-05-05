@@ -1,3 +1,4 @@
+import 'package:app/features/sign_up/presentation/credential.dart';
 import 'package:app/features/sign_up/presentation/sign_up_validator.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -10,32 +11,28 @@ void main() {
 
   group('signUpValidator', () {
     test('should return a valid password', () async {
-      final passwordValid = "Pass!qwert";
-      final result = validator.validatePassword(passwordValid);
-      expect(result, Right(passwordValid));
+      final credential = Credential(email: "douglas.com", password: '123456');
+      final result = validator.validateCredential(credential);
+      expect(result, Right(credential));
     });
     test('should return a valid email', () async {
-      final validEmail = "douglas@gmail.com";
-      final result = validator.validateEmail(validEmail);
-      expect(result, Right(validEmail));
+      final credential =
+          Credential(email: "douglas@gmail.com", password: '123456');
+      final result = validator.validateCredential(credential);
+      expect(result, Right(credential));
     });
-    test('should return a message email is empty', () async {
-      final invalidEmail = "asdfasd@";
-      final messageError = 'Email is empty';
-      final result = validator.validateEmail(invalidEmail);
-      expect(result, Left(InvalidEmail(message: messageError)));
-    });
+
     test('should return a message email is not valid', () async {
-      final invalidEmail = "asdfasd@";
+      final credential = Credential(email: "douglas.com", password: '123556');
       final messageError = 'Email is not valid';
-      final result = validator.validateEmail(invalidEmail);
+      final result = validator.validateCredential(credential);
       expect(result, Left(InvalidEmail(message: messageError)));
     });
 
     test('should return a message password is too short', () async {
-      final passwordValid = "Pass";
+      final credential = Credential(email: "douglas.com", password: '123');
       final messageError = 'Password is too short';
-      final result = validator.validatePassword(passwordValid);
+      final result = validator.validateCredential(credential);
       expect(result, Left(InvalidEmail(message: messageError)));
     });
   });

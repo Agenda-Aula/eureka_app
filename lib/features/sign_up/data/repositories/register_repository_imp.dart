@@ -1,7 +1,7 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/features/sign_up/data/datasource/firebase_source.dart';
 import 'package:app/features/sign_up/domain/entities/register_user.dart';
-import 'package:app/features/sign_up/domain/repositories/sign_up_user_repository.dart';
+import 'package:app/features/sign_up/domain/repositories/register_user_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class RegisterUserRepositoryImp extends RegisterUserRepository {
@@ -12,9 +12,9 @@ class RegisterUserRepositoryImp extends RegisterUserRepository {
   @override
   Future<Either<Failure, User>> createAccountRequest(
       String email, String password) async {
-    final userAuth = await authDataSource.createAccount(email, password);
-    if (userAuth != null) {
-      return Right(userAuth);
+    final user = await authDataSource.createAccount(email, password);
+    if (user != null) {
+      return Right(user);
     } else {
       return Left(ServerFailure());
     }

@@ -1,25 +1,21 @@
 import 'package:app/core/error/Failure.dart';
+import 'package:app/features/sign_up/presentation/credential.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
-class SignUpValidator {
-  Either<Failure, String> validateEmail(String str) {
-    var errorMessage = '';
-    if (_isNotEmptyEmail(str)) {
-      errorMessage = 'Email is empty';
-    } else if (_isValidEmail(str)) {
-      errorMessage = 'Email is not valid';
-    }
-    return _isNotEmptyEmail(str) && _isValidEmail(str)
-        ? Right(str)
-        : Left(InvalidEmail(message: errorMessage));
-  }
+import 'bloc/sign_up_user_bloc.dart';
 
-  Either<Failure, String> validatePassword(String str) {
-    if (_isValidPassword(str)) {
-      return Right(str);
+class SignUpValidator {
+  Either<Failure, Credential> validateCredential(Credential credential) {
+    final emailValidated = _isValidEmail(credential.email);
+    final pwValidated = _isValidPassword(credential.password);
+    if (!pwValidated) {
+      return Left(InvalidEmail(message: INVALID_INPUT_PASSWORD));
     }
-    return Left(InvalidEmail(message: 'Password is too short'));
+    if (!emailValidated) {
+      return Left(InvalidEmail(message: INVALID_INPUT_EMAIL));
+    }
+    return Right(credential);
   }
 
   bool _isValidPassword(String str) {
@@ -33,8 +29,6 @@ class SignUpValidator {
         .hasMatch(str);
     return emailValidPattern ?? false;
   }
-
-  bool _isNotEmptyEmail(String str) => str.isNotEmpty;
 }
 
 class InvalidEmail extends Failure {
