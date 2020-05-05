@@ -1,4 +1,5 @@
 # app
+![Coverage](https://raw.githubusercontent.com/douglasalipio/eurek_aapp/feature-create-account/coverage_badge.svg?sanitize=true)
 
 A new Flutter application.
 
