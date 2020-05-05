@@ -28,7 +28,7 @@ void main() {
       when(mockRepository.createAccountRequest(any, any))
           .thenAnswer((_) async => Right(user));
       // act
-      final result = await usecase.execute(Params(email, password));
+      final result = await usecase(Params(email, password));
       // assert
       expect(result, Right(user));
       verify(mockRepository.createAccountRequest(email, password));
@@ -40,7 +40,7 @@ void main() {
       when(mockRepository.createAccountRequest(any, any))
           .thenAnswer((_) async => Left(failure));
       // act
-      final result = await usecase.execute(Params(email, password));
+      final result = await usecase(Params(email, password));
       // assert
       expect(result, Left(failure));
       verify(mockRepository.createAccountRequest(email, password));
