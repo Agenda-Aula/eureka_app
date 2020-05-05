@@ -1,3 +1,5 @@
+![Coverage](https://raw.githubusercontent.com/douglasalipio/eureka_app/master/coverage_badge.svg?sanitize=true)
+
 # app
 ![Coverage](https://raw.githubusercontent.com/douglasalipio/eurek_aapp/feature-create-account/coverage_badge.svg?sanitize=true)
 
