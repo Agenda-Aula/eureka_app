@@ -14,7 +14,7 @@ class Loading extends SignUpUserState {}
 class Loaded extends SignUpUserState {
   final User user;
 
-  Loaded(this.user);
+  Loaded({@required this.user});
 
   @override
   List<Object> get props => [user];

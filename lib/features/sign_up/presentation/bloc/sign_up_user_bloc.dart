@@ -6,6 +6,7 @@ import 'package:app/features/sign_up/domain/usercases/register_user.dart';
 import 'package:app/features/sign_up/presentation/credential.dart';
 import 'package:app/features/sign_up/presentation/sign_up_validator.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -40,14 +41,20 @@ class SignUpUserBloc extends Bloc<SignUpUserEvent, SignUpUserState> {
         (credential) async* {
           yield Loading();
           final params = Params(credential.email, credential.password);
-//          final failureOrUser = await registerUser(params);
-//          yield failureOrUser.fold(
-//            (failure) => Error(message: SERVER_FAILURE_MESSAGE),
-//            (user) => Loaded(user),
-//          );
+          final failureOrUser = await registerUser(params);
+					yield* _eitherLoadedOrErrorState(failureOrUser);
         },
       );
     }
+  }
+
+  Stream<SignUpUserState> _eitherLoadedOrErrorState(
+    Either<Failure, User> failureOrUser,
+  ) async* {
+    yield failureOrUser.fold(
+      (failure) => Error(message: _mapFailureToMessage(failure)),
+      (user) => Loaded(user: user),
+    );
   }
 
   String _mapFailureToMessage(Failure failure) {

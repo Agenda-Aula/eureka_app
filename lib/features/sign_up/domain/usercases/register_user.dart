@@ -8,13 +8,11 @@ import 'package:equatable/equatable.dart';
 class RegisterUser implements UseCase<User, Params> {
   final RegisterUserRepository repository;
 
-
   RegisterUser({this.repository});
 
   @override
-  Future<Either<Failure, User>> call(Params params) async {
-    return await repository.createAccountRequest(params.email, params.password);
-  }
+  Future<Either<Failure, User>> call(Params params) async =>
+      await repository.createAccountRequest(params.email, params.password);
 }
 
 class Params extends Equatable {

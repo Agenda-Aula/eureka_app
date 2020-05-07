@@ -32,7 +32,7 @@ void main() {
     final validCredential =
         Credential(email: "douglas@gmail.com", password: "12345678");
     final invalidCredentials =
-        Credential(email: "douglas@gmail.com", password: "12345678");
+        Credential(email: "douglas.com", password: "123");
 
     blocTest(
       'SignUpBloc emitts [Empty] when Event is stared',
@@ -43,7 +43,7 @@ void main() {
     blocTest(
       'SignUpBloc emitts [Empty, Loading, Loaded] when data is gotten successfuly',
       build: () async => bloc,
-      expect: [Empty, Loading, Loaded],
+      expect: [Empty(), Loading(), Loaded(user: user)],
       act: (bloc) => bloc.add(SignUpUser(credential: validCredential)),
     );
 

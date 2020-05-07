@@ -10,11 +10,13 @@ void main() {
   });
 
   group('signUpValidator', () {
-    test('should return a valid password', () async {
-      final credential = Credential(email: "douglas.com", password: '123456');
+
+  	test('should return a valid password', () async {
+      final credential = Credential(email: "douglas@gmail.com", password: '123456');
       final result = validator.validateCredential(credential);
       expect(result, Right(credential));
     });
+
     test('should return a valid email', () async {
       final credential =
           Credential(email: "douglas@gmail.com", password: '123456');
