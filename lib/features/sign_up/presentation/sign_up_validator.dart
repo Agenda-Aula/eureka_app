@@ -1,5 +1,5 @@
 import 'package:app/core/error/Failure.dart';
-import 'package:app/features/sign_up/presentation/credential.dart';
+import 'package:app/features/sign_up/presentation/models/credential.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 

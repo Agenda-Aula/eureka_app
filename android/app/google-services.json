@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "889967554335",
+    "firebase_url": "https://agenda-aula-4db57.firebaseio.com",
+    "project_id": "agenda-aula-4db57",
+    "storage_bucket": "agenda-aula-4db57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889967554335:android:8a9369895aa59972ea8a2a",
+        "android_client_info": {
+          "package_name": "com.br.agendaaula.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889967554335-o8q76c1dsb8742ffmvm2pnbjcgggvnht.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.br.agendaaula.app",
+            "certificate_hash": "bc09e174ebdd1526169d843879d268a7c8a261dc"
+          }
+        },
+        {
+          "client_id": "889967554335-s1vr98llqb34gsvtaclci7eka2b2vb0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWO_1t-_kfPlJy71ZeWqS0VmF5pnIK1PY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889967554335-s1vr98llqb34gsvtaclci7eka2b2vb0k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "889967554335-0lt4nam4i3vf6pgd5h6udi0ifbgep1hs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.br.agendaaula.app"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889967554335:android:b72d4cdd92b83795ea8a2a",
+        "android_client_info": {
+          "package_name": "com.br.eureka.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889967554335-rube82p4om71hrkhmqvfmbnjdorm4v6i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.br.eureka.app",
+            "certificate_hash": "bc09e174ebdd1526169d843879d268a7c8a261dc"
+          }
+        },
+        {
+          "client_id": "889967554335-s1vr98llqb34gsvtaclci7eka2b2vb0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWO_1t-_kfPlJy71ZeWqS0VmF5pnIK1PY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889967554335-s1vr98llqb34gsvtaclci7eka2b2vb0k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "889967554335-0lt4nam4i3vf6pgd5h6udi0ifbgep1hs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.br.agendaaula.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

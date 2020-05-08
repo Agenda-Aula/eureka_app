@@ -1,7 +1,7 @@
 import 'package:app/features/sign_up/domain/entities/register_user.dart';
 import 'package:app/features/sign_up/domain/usercases/register_user.dart';
 import 'package:app/features/sign_up/presentation/bloc/sign_up_user_bloc.dart';
-import 'package:app/features/sign_up/presentation/credential.dart';
+import 'package:app/features/sign_up/presentation/models/credential.dart';
 import 'package:app/features/sign_up/presentation/sign_up_validator.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';

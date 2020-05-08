@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:app/core/error/Failure.dart';
 import 'package:app/features/sign_up/domain/entities/register_user.dart';
 import 'package:app/features/sign_up/domain/usercases/register_user.dart';
-import 'package:app/features/sign_up/presentation/credential.dart';
+import 'package:app/features/sign_up/presentation/models/credential.dart';
 import 'package:app/features/sign_up/presentation/sign_up_validator.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
