@@ -1,17 +1,17 @@
-part of 'sign_up_user_bloc.dart';
+part of 'sign_up_page_bloc.dart';
 
-abstract class SignUpUserState extends Equatable {
-  const SignUpUserState();
+abstract class SignUpState extends Equatable {
+  const SignUpState();
 
   @override
   List<Object> get props => [];
 }
 
-class Empty extends SignUpUserState {}
+class Empty extends SignUpState {}
 
-class Loading extends SignUpUserState {}
+class Loading extends SignUpState {}
 
-class Loaded extends SignUpUserState {
+class Loaded extends SignUpState {
   final User user;
 
   Loaded({@required this.user});
@@ -20,7 +20,7 @@ class Loaded extends SignUpUserState {
   List<Object> get props => [user];
 }
 
-class Error extends SignUpUserState {
+class Error extends SignUpState {
   final String message;
 
   Error({@required this.message});

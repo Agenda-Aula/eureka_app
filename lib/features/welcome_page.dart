@@ -1,5 +1,5 @@
-import 'package:app/features/sign_up/presentation/pages/sign_in_page.dart';
-import 'package:app/features/sign_up/presentation/pages/sign_up_page.dart';
+import 'package:app/features/sign_in/sign_in_page.dart';
+import 'package:app/features/sign_up/presentation/sign_up_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

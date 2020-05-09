@@ -3,7 +3,7 @@ import 'package:app/features/sign_up/presentation/models/credential.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
-import 'bloc/sign_up_user_bloc.dart';
+import 'bloc/sign_up_page_bloc.dart';
 
 class SignUpValidator {
   Either<Failure, Credential> validateCredential(Credential credential) {

@@ -1,18 +1,20 @@
-import 'package:app/features/sign_up/presentation/pages/sign_in_page.dart';
-import 'package:app/features/sign_up/presentation/widgets/bezierContainer.dart';
+import 'package:app/features/sign_up/presentation/bloc/sign_up_page_bloc.dart';
+import 'package:app/features/sign_up/presentation/sign_up_page.dart';
+import 'package:app/core/widgets/bezierContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class SignUpPage extends StatefulWidget {
-  SignUpPage({Key key, this.title}) : super(key: key);
+class SignInPage extends StatefulWidget {
+  SignInPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SignUpPageState createState() => _SignUpPageState();
+  _SignInPageState createState() => _SignInPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _SignInPageState extends State<SignInPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -32,6 +34,11 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       ),
     );
+
+    @override
+    dispose() {
+      super.dispose();
+    }
   }
 
   Widget _entryField(String title, {bool isPassword = false}) {
@@ -77,13 +84,94 @@ class _SignUpPageState extends State<SignUpPage> {
               end: Alignment.centerRight,
               colors: [Color(0xfffbb448), Color(0xfff7892b)])),
       child: Text(
-        'Register Now',
+        'Login',
         style: TextStyle(fontSize: 20, color: Colors.white),
       ),
     );
   }
 
-  Widget _loginAccountLabel() {
+  Widget _divider() {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: <Widget>[
+          SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ),
+          Text('or'),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _facebookButton() {
+    return Container(
+      height: 50,
+      margin: EdgeInsets.symmetric(vertical: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xff1959a9),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(5),
+                    topLeft: Radius.circular(5)),
+              ),
+              alignment: Alignment.center,
+              child: Text('g',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w400)),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xff2872ba),
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(5),
+                    topRight: Radius.circular(5)),
+              ),
+              alignment: Alignment.center,
+              child: Text('Log in with Google',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400)),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _createAccountLabel() {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20),
       alignment: Alignment.bottomCenter,
@@ -91,7 +179,7 @@ class _SignUpPageState extends State<SignUpPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Already have an account ?',
+            'Don\'t have an account ?',
             style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
           ),
           SizedBox(
@@ -100,10 +188,10 @@ class _SignUpPageState extends State<SignUpPage> {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignInPage()));
+                  MaterialPageRoute(builder: (context) => SignUpPage()));
             },
             child: Text(
-              'Login',
+              'Register',
               style: TextStyle(
                   color: Color(0xfff79c4f),
                   fontSize: 13,
@@ -142,7 +230,6 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField("Username"),
         _entryField("Email id"),
         _entryField("Password", isPassword: true),
       ],
@@ -176,16 +263,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   height: 20,
                 ),
                 _submitButton(),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 10),
+                  alignment: Alignment.centerRight,
+                  child: Text('Forgot Password ?',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                ),
+                _divider(),
+                _facebookButton(),
                 Expanded(
                   flex: 2,
                   child: SizedBox(),
-                )
+                ),
               ],
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: _loginAccountLabel(),
+            child: _createAccountLabel(),
           ),
           Positioned(top: 40, left: 0, child: _backButton()),
           Positioned(

@@ -10,28 +10,29 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 
-part 'sign_up_user_event.dart';
+part 'sign_up_page_event.dart';
 
-part 'sign_up_user_state.dart';
+part 'sign_up_page_state.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';
 const String INVALID_INPUT_EMAIL = 'Invalid email';
 const String INVALID_INPUT_EMPTY_EMAIL = 'Empty email';
 const String INVALID_INPUT_PASSWORD = 'Invalid password';
 
-class SignUpUserBloc extends Bloc<SignUpUserEvent, SignUpUserState> {
+class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   final RegisterUser registerUser;
   final SignUpValidator validator = SignUpValidator();
 
-  SignUpUserBloc({@required this.registerUser}) : assert(registerUser != null);
+  SignUpBloc({@required this.registerUser}) : assert(registerUser != null);
 
   @override
-  SignUpUserState get initialState => Empty();
+  SignUpState get initialState => Empty();
 
   @override
-  Stream<SignUpUserState> mapEventToState(
-    SignUpUserEvent event,
+  Stream<SignUpState> mapEventToState(
+    SignUpEvent event,
   ) async* {
+
     if (event is SignUpUser) {
       final credentialEither = validator.validateCredential(event.credential);
       yield* credentialEither.fold(
@@ -48,7 +49,7 @@ class SignUpUserBloc extends Bloc<SignUpUserEvent, SignUpUserState> {
     }
   }
 
-  Stream<SignUpUserState> _eitherLoadedOrErrorState(
+  Stream<SignUpState> _eitherLoadedOrErrorState(
     Either<Failure, User> failureOrUser,
   ) async* {
     yield failureOrUser.fold(

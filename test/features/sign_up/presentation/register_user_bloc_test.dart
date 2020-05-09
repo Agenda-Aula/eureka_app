@@ -1,6 +1,6 @@
 import 'package:app/features/sign_up/domain/entities/register_user.dart';
 import 'package:app/features/sign_up/domain/usercases/register_user.dart';
-import 'package:app/features/sign_up/presentation/bloc/sign_up_user_bloc.dart';
+import 'package:app/features/sign_up/presentation/bloc/sign_up_page_bloc.dart';
 import 'package:app/features/sign_up/presentation/models/credential.dart';
 import 'package:app/features/sign_up/presentation/sign_up_validator.dart';
 import 'package:bloc_test/bloc_test.dart';
@@ -13,14 +13,14 @@ class MockRegisterUser extends Mock implements RegisterUser {}
 class MockSignUpValidator extends Mock implements SignUpValidator {}
 
 void main() {
-  SignUpUserBloc bloc;
+  SignUpBloc bloc;
   MockRegisterUser mockRegisterUser;
   MockSignUpValidator mockValidator;
 
   setUp(() {
     mockRegisterUser = MockRegisterUser();
     mockValidator = MockSignUpValidator();
-    bloc = SignUpUserBloc(registerUser: mockRegisterUser);
+    bloc = SignUpBloc(registerUser: mockRegisterUser);
   });
   group('Register use', () {
     final user = User("douglas@gmail.com", "Douglas Mesquita");
