@@ -1,5 +1,5 @@
 import 'package:app/core/error/Failure.dart';
-import 'package:app/features/sign_up/domain/entities/register_user.dart';
+import 'package:app/features/sign_up/domain/entities/user.dart';
 import 'package:app/features/sign_up/domain/repositories/register_user_repository.dart';
 import 'package:app/features/sign_up/domain/usercases/register_user.dart';
 import 'package:dartz/dartz.dart';
@@ -25,25 +25,25 @@ void main() {
   group('Register user repository tests', () {
     test('should register a user from  the repoistory', () async {
       // arrange
-      when(mockRepository.createAccountRequest(any, any))
+      when(mockRepository.createAccount(any, any))
           .thenAnswer((_) async => Right(user));
       // act
       final result = await usecase(Params(email, password));
       // assert
       expect(result, Right(user));
-      verify(mockRepository.createAccountRequest(email, password));
+      verify(mockRepository.createAccount(email, password));
       verifyNoMoreInteractions(mockRepository);
     });
     test('should return an failure from the repoistory', () async {
       // arrange
       final failure = ServerFailure();
-      when(mockRepository.createAccountRequest(any, any))
+      when(mockRepository.createAccount(any, any))
           .thenAnswer((_) async => Left(failure));
       // act
       final result = await usecase(Params(email, password));
       // assert
       expect(result, Left(failure));
-      verify(mockRepository.createAccountRequest(email, password));
+      verify(mockRepository.createAccount(email, password));
       verifyNoMoreInteractions(mockRepository);
     });
   });

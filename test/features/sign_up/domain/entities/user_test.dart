@@ -1,5 +1,5 @@
 import 'package:app/features/sign_up/data/models/user_model.dart';
-import 'package:app/features/sign_up/domain/entities/register_user.dart';
+import 'package:app/features/sign_up/domain/entities/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

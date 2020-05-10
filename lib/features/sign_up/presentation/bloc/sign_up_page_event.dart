@@ -5,7 +5,7 @@ abstract class SignUpEvent extends Equatable {
 }
 
 class SignUpUser extends SignUpEvent {
-  final Credential credential;
+  final  credential;
 
   SignUpUser({@required this.credential});
 

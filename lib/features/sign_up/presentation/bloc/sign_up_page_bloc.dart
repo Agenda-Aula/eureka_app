@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:app/core/error/Failure.dart';
-import 'package:app/features/sign_up/domain/entities/register_user.dart';
+import 'package:app/features/sign_up/domain/entities/user.dart';
 import 'package:app/features/sign_up/domain/usercases/register_user.dart';
 import 'package:app/features/sign_up/presentation/models/credential.dart';
 import 'package:app/features/sign_up/presentation/sign_up_validator.dart';
@@ -32,7 +32,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   Stream<SignUpState> mapEventToState(
     SignUpEvent event,
   ) async* {
-
     if (event is SignUpUser) {
       final credentialEither = validator.validateCredential(event.credential);
       yield* credentialEither.fold(
@@ -43,7 +42,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
           yield Loading();
           final params = Params(credential.email, credential.password);
           final failureOrUser = await registerUser(params);
-					yield* _eitherLoadedOrErrorState(failureOrUser);
+          yield* _eitherLoadedOrErrorState(failureOrUser);
         },
       );
     }

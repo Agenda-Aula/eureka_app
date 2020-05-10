@@ -10,29 +10,27 @@ void main() {
   });
 
   group('signUpValidator', () {
-
-  	test('should return a valid password', () async {
-      final credential = Credential(email: "douglas@gmail.com", password: '123456');
+    test('should return a valid password', () async {
+      final credential = Credential('douglas@gmail.com', '123456');
       final result = validator.validateCredential(credential);
       expect(result, Right(credential));
     });
 
     test('should return a valid email', () async {
-      final credential =
-          Credential(email: "douglas@gmail.com", password: '123456');
+      final credential = Credential('douglas@gmail.com', '123456');
       final result = validator.validateCredential(credential);
       expect(result, Right(credential));
     });
 
     test('should return a message email is not valid', () async {
-      final credential = Credential(email: "douglas.com", password: '123556');
+      final credential = Credential('douglas.com', '123556');
       final messageError = 'Email is not valid';
       final result = validator.validateCredential(credential);
       expect(result, Left(InvalidEmail(message: messageError)));
     });
 
     test('should return a message password is too short', () async {
-      final credential = Credential(email: "douglas.com", password: '123');
+      final credential = Credential('douglas.com', '123');
       final messageError = 'Password is too short';
       final result = validator.validateCredential(credential);
       expect(result, Left(InvalidEmail(message: messageError)));

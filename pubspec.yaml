@@ -22,7 +22,7 @@ dependencies:
   #authentication
   firebase_auth: ^0.15.5+3
   #Bloc for state management
-  bloc: ^4.0.0
+  flutter_bloc: ^4.0.0
   #Functional programming  things
   dartz: ^0.8.9
   #Value  equality
@@ -37,6 +37,9 @@ dependencies:
   get_it: ^4.0.2
   #Google Fonts
   google_fonts: ^1.0.0
+  #Bloc pattern
+  #bloc_pattern: ^2.5.1
+  snack: ^1.0.4
 
   flutter:
     sdk: flutter
