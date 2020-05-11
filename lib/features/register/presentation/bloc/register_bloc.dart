@@ -1,4 +1,5 @@
-import 'package:app/features/sign_up/domain/usercases/register_user.dart';
+
+import 'package:app/features/register/domain/usercases/register_user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../validator.dart';

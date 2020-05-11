@@ -2,6 +2,7 @@ import 'package:app/features/register/domain/usercases/register_user.dart';
 import 'package:app/features/register/presentation/bloc/bloc.dart';
 import 'package:app/features/register/presentation/bloc/register_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -66,5 +67,22 @@ void main() {
       expect: [emailInvalidState],
       act: (bloc) => bloc.add(EmailChanged(email: "douglas....")),
     );
+
+    test('Register state fingerprint', () {
+      final registerState = RegisterState(
+          isEmailValid: true,
+          isPasswordValid: true,
+          isSubmitting: false,
+          isFailure: false,
+          isSuccess: false);
+
+      expect('''RegisterState {
+      isEmailValid: true,
+      isPasswordValid: true,      
+      isSubmitting: false,
+      isSuccess: false,
+      isFailure: false,
+    }''', registerState.toString());
+    });
   });
 }

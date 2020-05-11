@@ -1,4 +1,4 @@
-import 'package:app/features/sign_up/presentation/register_page.dart';
+import 'package:app/features/register/presentation/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

@@ -1,6 +1,8 @@
-import 'package:app/features/sign_up/presentation/bloc/bloc.dart';
+
+import 'package:app/features/register/presentation/bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 
 Widget entryPassword(TextEditingController pwController, RegisterState state) {
   return Container(

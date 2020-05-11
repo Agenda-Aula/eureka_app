@@ -1,9 +1,7 @@
 import 'package:app/core/widgets/bezierContainer.dart';
-import 'package:app/features/sign_up/presentation/bloc/bloc.dart';
-import 'package:app/features/sign_up/presentation/bloc/register_bloc.dart';
-import 'package:app/features/sign_up/presentation/widgets/register_account_label.dart';
-import 'package:app/features/sign_up/presentation/widgets/register_back_button.dart';
-import 'package:app/features/sign_up/presentation/widgets/register_form.dart';
+import 'package:app/features/register/presentation/widgets/register_account_label.dart';
+import 'package:app/features/register/presentation/widgets/register_back_button.dart';
+import 'package:app/features/register/presentation/widgets/register_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
