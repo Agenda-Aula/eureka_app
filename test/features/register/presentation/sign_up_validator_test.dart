@@ -1,6 +1,4 @@
-import 'package:app/features/sign_up/presentation/models/credential.dart';
-import 'package:app/features/sign_up/presentation/validator.dart';
-import 'package:dartz/dartz.dart';
+import 'package:app/features/register/presentation/validator.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
