@@ -1,33 +1,28 @@
+import 'package:app/features/sign_up/presentation/bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget emailPasswordWidget(
-    {TextEditingController emailController,
-    TextEditingController passwordController}) {
-  return Column(
-    children: <Widget>[
-      _entryEmail("Email", emailController),
-      _entryPassword("Password", passwordController),
-    ],
-  );
-}
-
-Widget _entryPassword(String title, TextEditingController passwordController) {
+Widget entryPassword(TextEditingController pwController, RegisterState state) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          title,
+          "Password",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         SizedBox(
           height: 10,
         ),
-        TextField(
-            controller: passwordController,
+        TextFormField(
+            controller: pwController,
             obscureText: true,
+            validator: (_) {
+              return !state.isPasswordValid ? 'Invalid Password' : null;
+            },
+            autovalidate: true,
+            autocorrect: false,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 fillColor: Color(0xfff3f3f4),
@@ -37,21 +32,27 @@ Widget _entryPassword(String title, TextEditingController passwordController) {
   );
 }
 
-Widget _entryEmail(String title, TextEditingController emailController) {
+Widget entryEmail(TextEditingController emailController, RegisterState state) {
   return Container(
     margin: EdgeInsets.symmetric(vertical: 10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          title,
+          "Email",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         SizedBox(
           height: 10,
         ),
-        TextField(
+        TextFormField(
+            keyboardType: TextInputType.emailAddress,
             controller: emailController,
+            validator: (_) {
+              return !state.isEmailValid ? 'Invalid Email' : null;
+            },
+            autovalidate: true,
+            autocorrect: false,
             decoration: InputDecoration(
                 border: InputBorder.none,
                 fillColor: Color(0xfff3f3f4),

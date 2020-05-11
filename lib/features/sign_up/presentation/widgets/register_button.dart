@@ -1,16 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SignUpButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String text;
+class RegisterButton extends StatelessWidget {
+  final VoidCallback _onPressed;
 
-  SignUpButton({@required this.onPressed, @required this.text});
+  RegisterButton({Key key, VoidCallback onPressed})
+      : _onPressed = onPressed,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-      onPressed: this.onPressed,
+      onPressed: _onPressed,
       textColor: Colors.white,
       padding: const EdgeInsets.all(0.0),
       child: Container(
@@ -25,7 +26,7 @@ class SignUpButton extends StatelessWidget {
         ),
         padding: const EdgeInsets.all(10.0),
         child: Text(
-          this.text,
+          'Register now',
           textAlign: TextAlign.center,
           style: TextStyle(fontSize: 20, color: Colors.white),
         ),

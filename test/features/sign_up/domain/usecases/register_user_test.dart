@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     mockRepository = MockRegisterUserRepository();
-    usecase = RegisterUser(mockRepository);
+    usecase = RegisterUser(repository: mockRepository);
     user = User(email, password);
   });
 

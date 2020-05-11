@@ -1,9 +1,7 @@
-import 'package:app/features/sign_up/presentation/bloc/sign_up_page_bloc.dart';
-import 'package:app/features/sign_up/presentation/sign_up_page.dart';
+import 'package:app/features/sign_up/presentation/register_page.dart';
 import 'package:app/core/widgets/bezierContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({Key key, this.title}) : super(key: key);
@@ -188,7 +186,7 @@ class _SignInPageState extends State<SignInPage> {
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SignUpPage()));
+                  MaterialPageRoute(builder: (context) => RegisterPage()));
             },
             child: Text(
               'Register',

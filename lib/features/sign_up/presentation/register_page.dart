@@ -1,32 +1,27 @@
 import 'package:app/core/widgets/bezierContainer.dart';
-import 'package:app/features/sign_up/presentation/bloc/sign_up_page_bloc.dart';
-import 'package:app/features/sign_up/presentation/widgets/sign_up_account_label.dart';
-import 'package:app/features/sign_up/presentation/widgets/sign_up_back_button.dart';
-import 'package:app/features/sign_up/presentation/widgets/sign_up_form.dart';
+import 'package:app/features/sign_up/presentation/bloc/bloc.dart';
+import 'package:app/features/sign_up/presentation/bloc/register_bloc.dart';
+import 'package:app/features/sign_up/presentation/widgets/register_account_label.dart';
+import 'package:app/features/sign_up/presentation/widgets/register_back_button.dart';
+import 'package:app/features/sign_up/presentation/widgets/register_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snack/snack.dart';
 
 import '../../injection_container.dart';
+import 'bloc/register_bloc.dart';
 
-class SignUpPage extends StatelessWidget {
-  SnackBar _snackBar;
-
+class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BlocProvider(
-      create: (BuildContext context) => sl<SignUpBloc>(),
+        body: BlocProvider<RegisterBloc>(
+      create: (BuildContext context) => sl<RegisterBloc>(),
       child: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: <Widget>[
-              BlocBuilder<SignUpBloc, SignUpState>(
-                builder: (context, state) {
-                  return _stateView(state, context);
-                },
-              ),
+              RegisterForm(),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: loginAccountLabelWidget(context),
@@ -46,16 +41,5 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     ));
-  }
-
-  Widget _stateView(SignUpState signUpState, BuildContext context) {
-    if (signUpState is Loading) {
-      return Container();
-    } else if (signUpState is Loaded) {
-      return Container(
-        child: Text('Carregado e criado - '),
-      );
-    }
-    return SignUpForm();
   }
 }

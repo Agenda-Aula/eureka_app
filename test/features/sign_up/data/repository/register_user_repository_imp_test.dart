@@ -1,6 +1,6 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/error/exceptions.dart';
-import 'package:app/features/sign_up/data/datasource/auth_data_source.dart';
+import 'package:app/features/sign_up/data/datasource/register_user_data_source.dart';
 import 'package:app/features/sign_up/data/models/user_model.dart';
 import 'package:app/features/sign_up/data/repositories/register_user_repository_imp.dart';
 import 'package:app/features/sign_up/domain/entities/user.dart';
@@ -8,17 +8,19 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockAuthDataSource extends Mock implements AuthDataSource {}
+class MockRegisterUserDataSource extends Mock
+    implements RegisterUserDataSourceImp {}
 
 void main() {
-  MockAuthDataSource mockAuthDataSource;
+  MockRegisterUserDataSource mockRegisterUserDataSource;
   RegisterUserRepositoryImp repository;
   String email = "douglas@gmail.com";
   String displayName = "Douglas Mesquita";
 
   setUp(() {
-    mockAuthDataSource = MockAuthDataSource();
-    repository = RegisterUserRepositoryImp(authDataSource: mockAuthDataSource);
+    mockRegisterUserDataSource = MockRegisterUserDataSource();
+    repository =
+        RegisterUserRepositoryImp(authDataSource: mockRegisterUserDataSource);
   });
 
   group('Auth data source tests', () {
@@ -26,12 +28,12 @@ void main() {
       // arrange
       final userModel = UserModel(email: email, displayName: displayName);
       final user = User(email, displayName);
-      when(mockAuthDataSource.createAccount(any, any))
+      when(mockRegisterUserDataSource.createAccount(any, any))
           .thenAnswer((_) async => userModel);
       // act
       final result = await repository.createAccount(email, displayName);
       // assert
-      verify(mockAuthDataSource.createAccount(email, displayName));
+      verify(mockRegisterUserDataSource.createAccount(email, displayName));
       expect(result, equals(Right(user)));
     });
 
@@ -39,12 +41,12 @@ void main() {
       // arrange
       final userModel = UserModel(email: email, displayName: displayName);
       final user = User(email, displayName);
-      when(mockAuthDataSource.createAccount(any, any))
+      when(mockRegisterUserDataSource.createAccount(any, any))
           .thenThrow(ServerException());
       // act
       final result = await repository.createAccount(email, displayName);
       // assert
-      verify(mockAuthDataSource.createAccount(email, displayName));
+      verify(mockRegisterUserDataSource.createAccount(email, displayName));
       expect(result, equals(Left(ServerFailure())));
     });
   });

@@ -9,10 +9,10 @@ import 'package:flutter/foundation.dart';
 class RegisterUser implements UseCase<User, Params> {
   final RegisterUserRepository repository;
 
-  RegisterUser(this.repository);
+  RegisterUser({@required this.repository});
 
   @override
-  Future<Either<Failure, User>> call(Params params) async =>
+  Future<Either<Failure, User>>  call(Params params) async =>
       await repository.createAccount(params.email, params.password);
 }
 
@@ -23,5 +23,5 @@ class Params extends Equatable {
   Params(this.email, this.password);
 
   @override
-  List<Object> get props => [email];
+  List<Object> get props => [email, password];
 }
