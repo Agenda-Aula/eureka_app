@@ -1,5 +1,5 @@
 # app
-![Coverage](https://raw.githubusercontent.com/douglasalipio/eurek_aapp/feature-create-account/coverage_badge.svg?sanitize=true)
+[![Coverage Status](https://coveralls.io/repos/github/douglasalipio/eureka_app/badge.svg)](https://coveralls.io/github/douglasalipio/eureka_app)
 
 A new Flutter application.
 
