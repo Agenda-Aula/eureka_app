@@ -2,7 +2,6 @@ import 'package:app/features/register/domain/usercases/register_user.dart';
 import 'package:app/features/register/presentation/bloc/bloc.dart';
 import 'package:app/features/register/presentation/bloc/register_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -67,6 +66,20 @@ void main() {
       expect: [emailInvalidState],
       act: (bloc) => bloc.add(EmailChanged(email: "douglas....")),
     );
+  });
+
+  group('RegisterBloc fingerprint', () {
+    test('Register event password fingerprint', () {
+      final passwordEvent = PasswordChanged(password: "1234566");
+      final expected = "Password:####";
+      expect(expected, passwordEvent.toString());
+    });
+
+    test('Register event email fingerprint', () {
+      final email = "douglas@gmail.com";
+      final emailEvent = EmailChanged(email: email);
+      expect("Email: $email", emailEvent.toString());
+    });
 
     test('Register state fingerprint', () {
       final registerState = RegisterState(
@@ -83,6 +96,20 @@ void main() {
       isSuccess: false,
       isFailure: false,
     }''', registerState.toString());
+    });
+  });
+
+  group('RegisterBloc verify properties', () {
+    test('verify email property', () {
+      final email = "douglas@gmail.com";
+      final passwordEvent = EmailChanged(email: email);
+      expect('${[email]}', passwordEvent.props.toString());
+    });
+
+    test('verify password property', () {
+      final password = "1234567";
+      final passwordEvent = PasswordChanged(password: password);
+      expect('${[password]}', passwordEvent.props.toString());
     });
   });
 }

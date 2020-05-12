@@ -1,9 +1,9 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/error/exceptions.dart';
-import 'package:app/features/sign_up/data/datasource/register_user_data_source.dart';
-import 'package:app/features/sign_up/data/models/user_model.dart';
-import 'package:app/features/sign_up/data/repositories/register_user_repository_imp.dart';
-import 'package:app/features/sign_up/domain/entities/user.dart';
+import 'package:app/features/register/data/datasource/register_user_data_source.dart';
+import 'package:app/features/register/data/models/user_model.dart';
+import 'package:app/features/register/data/repositories/register_user_repository_imp.dart';
+import 'package:app/features/register/domain/entities/user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -34,6 +34,7 @@ void main() {
       final result = await repository.createAccount(email, displayName);
       // assert
       verify(mockRegisterUserDataSource.createAccount(email, displayName));
+      verifyNoMoreInteractions(mockRegisterUserDataSource);
       expect(result, equals(Right(user)));
     });
 

@@ -20,7 +20,7 @@ dependencies:
   #database
   cloud_firestore: ^0.13.4+2
   #authentication
-  firebase_auth: ^0.15.5+3
+  firebase_auth: ^0.16.0
   #Bloc for state management
   flutter_bloc: ^4.0.0
   #Functional programming  things
@@ -40,9 +40,9 @@ dependencies:
   #Bloc pattern
   #bloc_pattern: ^2.5.1
   snack: ^1.0.4
-  
+  firebase_auth_mocks: ^0.2.0
   rxdart: ^0.24.0
-  
+
   flutter:
     sdk: flutter
 
