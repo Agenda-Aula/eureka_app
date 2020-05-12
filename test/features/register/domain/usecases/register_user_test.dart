@@ -1,6 +1,6 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/features/register/domain/entities/user.dart';
-import 'package:app/features/register/domain/repositories/register_user_repository.dart';
+import 'package:app/features/register/domain/register_user_repository.dart';
 import 'package:app/features/register/domain/usercases/register_user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';

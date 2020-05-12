@@ -1,11 +1,11 @@
 import 'package:app/core/widgets/bezierContainer.dart';
 import 'package:app/features/register/presentation/widgets/register_account_label.dart';
 import 'package:app/features/register/presentation/widgets/register_back_button.dart';
-import 'package:app/features/register/presentation/widgets/register_form.dart';
+import 'package:app/features/register/presentation/register_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../injection_container.dart';
+import '../../../di/injection_container.dart';
 import 'bloc/register_bloc.dart';
 
 class RegisterPage extends StatelessWidget {

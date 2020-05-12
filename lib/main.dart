@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'features/welcome_page.dart';
-import 'features/injection_container.dart' as di;
+import 'di/injection_container.dart' as di;
 
 void main()async {
 	WidgetsFlutterBinding.ensureInitialized();
