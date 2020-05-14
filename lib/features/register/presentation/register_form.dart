@@ -1,9 +1,12 @@
 import 'package:app/features/register/presentation/bloc/bloc.dart';
-import 'package:app/features/register/presentation/widgets/register_button.dart';
 import 'package:app/core/widgets/register_email_password_field.dart';
+import 'package:app/features/register/presentation/widgets/register_button.dart';
 import 'package:app/features/register/presentation/widgets/register_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'bloc/register_bloc.dart';
+import 'bloc/register_event.dart';
 
 class RegisterForm extends StatefulWidget {
   @override

@@ -1,5 +1,6 @@
 
-import 'package:app/features/register/domain/usercases/register_user.dart';
+import 'package:app/features/user/domain/usecases/register_user.dart';
+import 'package:app/features/register/presentation/bloc/register_event.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../validator.dart';

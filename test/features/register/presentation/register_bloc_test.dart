@@ -1,6 +1,5 @@
-import 'package:app/features/register/domain/usercases/register_user.dart';
+import 'package:app/features/user/domain/usecases/register_user.dart';
 import 'package:app/features/register/presentation/bloc/bloc.dart';
-import 'package:app/features/register/presentation/bloc/register_bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

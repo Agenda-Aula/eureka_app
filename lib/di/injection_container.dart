@@ -1,9 +1,9 @@
 
-import 'package:app/features/register/data/datasource/register_user_data_source.dart';
-import 'package:app/features/register/data/repositories/register_user_repository_imp.dart';
-import 'package:app/features/register/domain/register_user_repository.dart';
-import 'package:app/features/register/domain/usercases/register_user.dart';
-import 'package:app/features/register/presentation/bloc/register_bloc.dart';
+import 'package:app/features/user/data/datasource/user_data_source.dart';
+import 'package:app/features/user/data/repositories/user_repository_imp.dart';
+import 'package:app/features/user/domain/user_repository.dart';
+import 'package:app/features/user/domain/usecases/register_user.dart';
+import 'package:app/features/register/presentation/bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -16,10 +16,10 @@ Future<void> init() async {
   sl.registerLazySingleton(() => RegisterUser(repository: sl()));
 
   // Repositories
-  sl.registerLazySingleton<RegisterUserRepository>(
-      () => RegisterUserRepositoryImp(authDataSource: sl()));
+  sl.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImp(userDataSource: sl()));
 
   // Data source
-  sl.registerLazySingleton<RegisterUserDataSource>(
+  sl.registerLazySingleton<UserDataSource>(
       () => RegisterUserDataSourceImp());
 }
