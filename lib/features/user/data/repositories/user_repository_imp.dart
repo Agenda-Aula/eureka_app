@@ -14,10 +14,9 @@ class UserRepositoryImp extends UserRepository {
   UserRepositoryImp({this.userDataSource});
 
   @override
-  Future<Either<Failure, User>> createAccount(
-      String email, String password) async {
+  Future<Either<Failure, User>> signUp(String email, String password) async {
     try {
-      final userModel = await userDataSource.createAccount(email, password);
+      final userModel = await userDataSource.signUp(email, password);
       return Right(mapper.map(userModel));
     } on ServerException {
       return Left(ServerFailure());
@@ -43,5 +42,26 @@ class UserRepositoryImp extends UserRepository {
       return Right(true);
     else
       return Right(false);
+  }
+
+  @override
+  Future<Either<Failure, bool>> signInWithCredentials(
+      String email, String password) async {
+    try {
+      await userDataSource.signInWithCredentials(email, password);
+      return Right(true);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> signInWithGoogle() async {
+    try {
+      await userDataSource.signInWithGoogle();
+      return Right(true);
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 }

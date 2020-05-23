@@ -25,27 +25,29 @@ void main() {
   });
 
   group('Register user repository tests', () {
+
     test('should register a user from  the repoistory', () async {
       // arrange
-      when(mockRepository.createAccount(any, any))
+      when(mockRepository.signUp(any, any))
           .thenAnswer((_) async => Right(user));
       // act
       final result = await usecase(params);
       // assert
       expect(result, Right(user));
-      verify(mockRepository.createAccount(email, password));
+      verify(mockRepository.signUp(email, password));
       verifyNoMoreInteractions(mockRepository);
     });
+
     test('should return an failure from the repoistory', () async {
       // arrange
       final failure = ServerFailure();
-      when(mockRepository.createAccount(any, any))
+      when(mockRepository.signUp(any, any))
           .thenAnswer((_) async => Left(failure));
       // act
       final result = await usecase(Params(email, password));
       // assert
       expect(result, Left(failure));
-      verify(mockRepository.createAccount(email, password));
+      verify(mockRepository.signUp(email, password));
       verifyNoMoreInteractions(mockRepository);
     });
 

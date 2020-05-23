@@ -21,5 +21,5 @@ Future<void> init() async {
 
   // Data source
   sl.registerLazySingleton<UserDataSource>(
-      () => RegisterUserDataSourceImp());
+      () => UserDataSourceImp());
 }

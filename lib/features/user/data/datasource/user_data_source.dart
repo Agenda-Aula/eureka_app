@@ -2,12 +2,12 @@ import 'package:app/features/user/data/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class RegisterUserDataSourceImp extends UserDataSource {
+class UserDataSourceImp extends UserDataSource {
   final _firebaseAuth = FirebaseAuth.instance;
-  final googleSignIn = GoogleSignIn();
+  final _googleSignIn = GoogleSignIn();
 
   @override
-  Future<UserModel> createAccount(String email, String password) async {
+  Future<UserModel> signUp(String email, String password) async {
     final result = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
 
@@ -32,13 +32,37 @@ class RegisterUserDataSourceImp extends UserDataSource {
 
   @override
   Future<void> signOut() => _firebaseAuth.signOut();
+
+  @override
+  Future<void> signInWithCredentials(String email, String password) async {
+    return await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+  }
+
+	Future<void> signInWithGoogle() async {
+		final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+		final GoogleSignInAuthentication googleAuth =
+		await googleUser.authentication;
+		final AuthCredential credential = GoogleAuthProvider.getCredential(
+			accessToken: googleAuth.accessToken,
+			idToken: googleAuth.idToken,
+		);
+		await _firebaseAuth.signInWithCredential(credential);
+	}
 }
 
 abstract class UserDataSource {
+	Future<UserModel> signUp(String email, String password);
 
-  Future<UserModel> isSignIn();
+	Future<void> signInWithGoogle();
 
-  Future<void> signOut();
+	Future<void> signInWithCredentials(String email, String password);
 
-  Future<UserModel> createAccount(String email, String password);
+	Future<void> signOut();
+
+	Future<UserModel> isSignIn();
+
+
 }

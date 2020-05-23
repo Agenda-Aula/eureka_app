@@ -10,8 +10,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockRegisterUserDataSource extends Mock
-    implements RegisterUserDataSourceImp {}
+class MockRegisterUserDataSource extends Mock implements UserDataSourceImp {}
 
 class FutureCallbackMock extends Mock implements Function {
   Future<void> call();
@@ -23,6 +22,7 @@ void main() {
   String email = "douglas@gmail.com";
   String displayName = "Douglas Mesquita";
   String profileUrl = "http://mypic.com";
+  String password = "1234567";
   UserModel userModel;
   User user;
 
@@ -37,24 +37,24 @@ void main() {
   group('User data source tests', () {
     test('should create an user', () async {
       // arrange
-      when(mockRegisterUserDataSource.createAccount(any, any))
+      when(mockRegisterUserDataSource.signUp(any, any))
           .thenAnswer((_) async => userModel);
       // act
-      final result = await repository.createAccount(email, displayName);
+      final result = await repository.signUp(email, displayName);
       // assert
-      verify(mockRegisterUserDataSource.createAccount(email, displayName));
+      verify(mockRegisterUserDataSource.signUp(email, displayName));
       verifyNoMoreInteractions(mockRegisterUserDataSource);
       expect(result, Right(user));
     });
 
     test('should return a failure after creating account', () async {
       // arrange
-      when(mockRegisterUserDataSource.createAccount(any, any))
+      when(mockRegisterUserDataSource.signUp(any, any))
           .thenThrow(ServerException());
       // act
-      final result = await repository.createAccount(email, displayName);
+      final result = await repository.signUp(email, displayName);
       // assert
-      verify(mockRegisterUserDataSource.createAccount(email, displayName));
+      verify(mockRegisterUserDataSource.signUp(email, displayName));
       expect(result, Left(ServerFailure()));
     });
 
@@ -115,6 +115,51 @@ void main() {
       verify(mockRegisterUserDataSource.signOut());
 
       expect(result, Right((false)));
+    });
+
+    test('should login with credentials', () async {
+      // arrange
+      when(mockRegisterUserDataSource.signInWithCredentials(any, any))
+          .thenAnswer((_) async => Right(false));
+      // act
+      final result = await repository.signInWithCredentials(email, password);
+      // assert
+      verify(mockRegisterUserDataSource.signInWithCredentials(email, password));
+
+      expect(result, Right((false)));
+    });
+
+    test('should failure login with credentials', () async {
+      // arrange
+      when(mockRegisterUserDataSource.signInWithCredentials(email, password))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.signInWithCredentials(email, password);
+      // assert
+      verify(mockRegisterUserDataSource.signInWithCredentials(email, password));
+      expect(result, Left(ServerFailure()));
+    });
+
+    test('should login with google', () async {
+      // arrange
+      when(mockRegisterUserDataSource.signInWithGoogle())
+          .thenAnswer((_) async => Right(true));
+      // act
+      final result = await repository.signInWithGoogle();
+      // assert
+      verify(mockRegisterUserDataSource.signInWithGoogle());
+      expect(result, Right((true)));
+    });
+
+    test('should failure login with google', () async {
+      // arrange
+      when(mockRegisterUserDataSource.signInWithGoogle())
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.signInWithGoogle();
+      // assert
+      verify(mockRegisterUserDataSource.signInWithGoogle());
+      expect(result, Left(ServerFailure()));
     });
   });
 }

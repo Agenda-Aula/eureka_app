@@ -1,6 +1,6 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
-import 'package:app/features/authentication/domain/usecases/logged_in.dart';
+import 'package:app/features/authentication/domain/usecases/is_logged_in.dart';
 import 'package:app/features/user/data/models/user_model.dart';
 import 'package:app/features/user/domain/entitties/user.dart';
 import 'package:app/features/user/domain/user_repository.dart';

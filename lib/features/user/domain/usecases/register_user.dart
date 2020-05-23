@@ -12,8 +12,8 @@ class RegisterUser implements UseCase<User, Params> {
   RegisterUser({@required this.repository});
 
   @override
-  Future<Either<Failure, User>>  call(Params params) async =>
-      await repository.createAccount(params.email, params.password);
+  Future<Either<Failure, User>> call(Params params) async =>
+      await repository.signUp(params.email, params.password);
 }
 
 class Params extends Equatable {
