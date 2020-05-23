@@ -2,9 +2,7 @@ import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/authentication/domain/usecases/is_logged_in.dart';
 import 'package:app/features/user/data/models/user_model.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
 import 'package:app/features/user/domain/user_repository.dart';
-import 'package:app/features/user/domain/usecases/register_user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -14,9 +12,14 @@ class MockUserRepository extends Mock implements UserRepository {}
 void main() {
   IsUserLoggedIn usecase;
   MockUserRepository mockRepository;
+	String email = "douglas@gmail.com";
+	String password = "12345678";
+	Params params;
+
   setUp(() {
     mockRepository = MockUserRepository();
     usecase = IsUserLoggedIn(repository: mockRepository);
+		params = Params(email, password);
   });
 
   group('Group', () {
@@ -58,5 +61,9 @@ void main() {
       verify(mockRepository.isLoggedIn());
       verifyNoMoreInteractions(mockRepository);
     });
+
+		test('verify params property', () {
+			expect('${[email, password]}', params.props.toString());
+		});
   });
 }
