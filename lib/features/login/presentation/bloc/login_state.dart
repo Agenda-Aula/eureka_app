@@ -1,9 +1,8 @@
-
-
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-class LoginState {
+class LoginState extends Equatable {
   final bool isEmailValid;
   final bool isPasswordValid;
   final bool isSubmitting;
@@ -43,7 +42,7 @@ class LoginState {
   factory LoginState.failure() {
     return LoginState(
       isEmailValid: true,
-      isPasswordValid: true,
+      isPasswordValid: false,
       isSubmitting: false,
       isSuccess: false,
       isFailure: true,
@@ -60,16 +59,22 @@ class LoginState {
     );
   }
 
-  LoginState update({
-    bool isEmailValid,
+  LoginState updateEmail({bool isEmailValid}) {
+    return copyWith(
+      isSubmitting: false,
+      isSuccess: isEmailValid,
+      isFailure: false,
+    );
+  }
+
+  LoginState updatePassword({
     bool isPasswordValid,
   }) {
     return copyWith(
-      isEmailValid: isEmailValid,
       isPasswordValid: isPasswordValid,
       isSubmitting: false,
-      isSuccess: false,
-      isFailure: false,
+      isSuccess: isPasswordValid,
+      isFailure: !isPasswordValid,
     );
   }
 
@@ -100,4 +105,8 @@ class LoginState {
       isFailure: $isFailure,
     }''';
   }
+
+  @override
+  List<Object> get props =>
+      [isEmailValid, isPasswordValid, isSubmitting, isSuccess, isFailure];
 }

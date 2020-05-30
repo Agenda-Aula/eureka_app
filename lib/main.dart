@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'features/welcome_page.dart';
 import 'di/injection_container.dart' as di;
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
 			theme: ThemeData(
 				primarySwatch: Colors.blue,
 				textTheme:GoogleFonts.latoTextTheme(textTheme).copyWith(
-					body1: GoogleFonts.montserrat(textStyle: textTheme.body1),
+					bodyText2: GoogleFonts.montserrat(textStyle: textTheme.bodyText2),
 				),
 			),
 			debugShowCheckedModeBanner: false,

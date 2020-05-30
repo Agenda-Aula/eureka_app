@@ -7,37 +7,38 @@ import 'package:mockito/mockito.dart';
 class MockSignInWithCredentials extends Mock implements SignInWithCredentials {}
 
 void main() {
-  LoginBloc bloc;
-  SignInWithCredentials mockSignInWithCredentials;
+	LoginBloc loginBloc;
+	SignInWithCredentials mockSignInWithCredentials;
 
-  setUp(() {
-    mockSignInWithCredentials = MockSignInWithCredentials();
-    bloc = LoginBloc(signInWithCredentials: mockSignInWithCredentials);
-  });
+	setUp(() {
+		mockSignInWithCredentials = MockSignInWithCredentials();
+		loginBloc = LoginBloc(signInWithCredentials: mockSignInWithCredentials);
 
-  test('initialState should be Unitialized', () {
-    // assert
-    expect(bloc.initialState, equals(LoginState.empty()));
-  });
+	});
 
-  blocTest(
-    'RegisterBloc emitts valid passowrd state',
-    build: () async => bloc,
-    expect: [],
-    act: (bloc) => bloc.add(PasswordChanged(password: "1234567")),
-  );
+	test('initialState should be Unitialized', () {
+		// assert
+		expect(loginBloc.initialState, equals(LoginState.empty()));
+	});
 
-  blocTest(
-    'RegisterBloc emitts invalid  password state',
-    build: () async => bloc,
-    expect: [PasswordChanged(password: "12345")],
-    act: (bloc) => bloc.add(PasswordChanged(password: "12345")),
-  );
+	blocTest(
+		'RegisterBloc emitts valid passowrd state',
+		build: () async => loginBloc,
+		act: (bloc) => bloc.add(PasswordChanged(password: "1234567")),
+		expect: [LoginState.success()],
+	);
 
-  blocTest(
-    'RegisterBloc emitts valid email state',
-    build: () async => bloc,
-    expect: [LoginState.success()],
-    act: (bloc) => bloc.add(EmailChanged(email: "douglas@gmail.com")),
-  );
+	blocTest(
+		'RegisterBloc emitts invalid  password state',
+		build: () async => loginBloc,
+		act: (bloc) => bloc.add(PasswordChanged(password: "12")),
+		expect: [LoginState.failure()],
+	);
+
+	blocTest(
+		'RegisterBloc emitts valid email state',
+		build: () async => loginBloc,
+		expect: [LoginState.success()],
+		act: (bloc) => bloc.add(EmailChanged(email: "douglas@gmail.com")),
+	);
 }

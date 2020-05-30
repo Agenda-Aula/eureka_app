@@ -120,13 +120,12 @@ void main() {
     test('should login with credentials', () async {
       // arrange
       when(mockRegisterUserDataSource.signInWithCredentials(any, any))
-          .thenAnswer((_) async => Right(false));
+          .thenAnswer((_) async => Right(true));
       // act
       final result = await repository.signInWithCredentials(email, password);
       // assert
       verify(mockRegisterUserDataSource.signInWithCredentials(email, password));
-
-      expect(result, Right((false)));
+      expect(result, Right((true)));
     });
 
     test('should failure login with credentials', () async {

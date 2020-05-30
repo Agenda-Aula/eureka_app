@@ -1,13 +1,11 @@
 import 'package:app/core/widgets/bezierContainer.dart';
-import 'package:app/core/widgets/register_email_password_field.dart';
 import 'package:app/features/login/presentation/widgets/barrier.dart';
 import 'package:app/features/login/presentation/widgets/create_account_label.dart';
 import 'package:app/features/login/presentation/widgets/google_sign_in_button.dart';
 import 'package:app/features/login/presentation/widgets/logo_name_label.dart';
 import 'package:app/features/login/presentation/widgets/submit_button.dart';
-import 'package:app/features/register/presentation/register_page.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class SignInPage extends StatefulWidget {
   SignInPage({Key key, this.title}) : super(key: key);
