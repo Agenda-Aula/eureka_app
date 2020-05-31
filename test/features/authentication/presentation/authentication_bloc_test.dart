@@ -4,9 +4,11 @@ import 'package:app/features/authentication/domain/usecases/logged_out.dart';
 import 'package:app/features/authentication/presentation/authentication_bloc.dart';
 import 'package:app/features/user/domain/entitties/user.dart';
 import 'package:app/features/user/domain/usecases/get_user.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+
 
 class MockUserLoggedOut extends Mock implements UserLoggedOut {}
 
@@ -36,31 +38,37 @@ void main() {
     expect(bloc.initialState, equals(Uninitialized()));
   });
 
-  test(
-    'AuthenticateBloc emitts authenticated',
-    () async {
-      // arrange
-      final user = User('', '', '');
-      when(mockGetUser(any)).thenAnswer((_) async => Right(user));
-      // act
-      bloc.add(LoggedIn());
-      await untilCalled(mockGetUser.call(NoParams()));
-      // assert
-      verify(mockGetUser.call(NoParams()));
-    },
-  );
+  blocTest('AuthenticateBloc emits Authenticated after calling get user',
+      build: () {
+        when(mockUserLoggedIn.call(NoParams())).thenAnswer(
+              (_) async => Future.value( Right(User('', '', '') )),
+              );
+        return Future.value(bloc);
+      },
+      act: (bloc) => bloc.add(AppStarted()),
+      expect: [Authenticated(user: User('', '', ''))],
+      verify: (_) async {
+        verify(mockUserLoggedIn.call(NoParams())).called(1);
+      });
 
-  test(
-    'AuthenticateBloc emitts authenticated',
-    () async {
-      // arrange
-      final user = User('', '', '');
-      when(mockGetUser(any)).thenAnswer((_) async => Right(user));
-      // act
-      bloc.add(LoggedOut());
-      await untilCalled(mockUserLoggedOut.call(NoParams()));
-      // assert
-      verify(mockUserLoggedOut.call(NoParams()));
-    },
-  );
+  blocTest('AuthenticateBloc emits Authenticated after calling logged in',
+      build: () {
+        when(mockGetUser.call(NoParams())).thenAnswer(
+                (_) async => Right(User('', '', ''))
+        );
+        return Future.value(bloc);
+      },
+      act: (bloc) => bloc.add(LoggedIn()),
+      expect: [Authenticated(user: User('', '', ''))],
+      verify: (_) async {
+        verify(mockGetUser.call(NoParams())).called(1);
+      });
+
+  blocTest('AuthenticateBloc emits Authenticated after calling logged out',
+      build: () async => bloc,
+      act: (bloc) => bloc.add(LoggedOut()),
+      expect: [Unauthenticated()],
+      verify: (_) async {
+        verify(mockUserLoggedOut.call(NoParams())).called(1);
+      });
 }
