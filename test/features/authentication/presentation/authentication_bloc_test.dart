@@ -1,3 +1,4 @@
+import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/authentication/domain/usecases/is_logged_in.dart';
 import 'package:app/features/authentication/domain/usecases/logged_out.dart';
@@ -8,7 +9,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-
 
 class MockUserLoggedOut extends Mock implements UserLoggedOut {}
 
@@ -41,8 +41,8 @@ void main() {
   blocTest('AuthenticateBloc emits Authenticated after calling get user',
       build: () {
         when(mockUserLoggedIn.call(NoParams())).thenAnswer(
-              (_) async => Future.value( Right(User('', '', '') )),
-              );
+          (_) async => Future.value(Right(User('', '', ''))),
+        );
         return Future.value(bloc);
       },
       act: (bloc) => bloc.add(AppStarted()),
@@ -53,9 +53,8 @@ void main() {
 
   blocTest('AuthenticateBloc emits Authenticated after calling logged in',
       build: () {
-        when(mockGetUser.call(NoParams())).thenAnswer(
-                (_) async => Right(User('', '', ''))
-        );
+        when(mockGetUser.call(NoParams()))
+            .thenAnswer((_) async => Right(User('', '', '')));
         return Future.value(bloc);
       },
       act: (bloc) => bloc.add(LoggedIn()),
@@ -70,5 +69,29 @@ void main() {
       expect: [Unauthenticated()],
       verify: (_) async {
         verify(mockUserLoggedOut.call(NoParams())).called(1);
+      });
+
+  blocTest('AuthenticateBloc emits Unauthenticated after calling AppStarted',
+      build: () {
+        when(mockUserLoggedIn.call(NoParams()))
+            .thenAnswer((_) async => Left(ServerFailure()));
+        return Future.value(bloc);
+      },
+      act: (bloc) => bloc.add(AppStarted()),
+      expect: [Unauthenticated()],
+      verify: (_) async {
+        verify(mockUserLoggedIn.call(NoParams())).called(1);
+      });
+
+  blocTest('AuthenticateBloc emits Unauthenticated after calling logged in',
+      build: () {
+        when(mockGetUser.call(NoParams()))
+            .thenAnswer((_) async => Left(ServerFailure()));
+        return Future.value(bloc);
+      },
+      act: (bloc) => bloc.add(LoggedIn()),
+      expect: [Unauthenticated()],
+      verify: (_) async {
+        verify(mockGetUser.call(NoParams())).called(1);
       });
 }
