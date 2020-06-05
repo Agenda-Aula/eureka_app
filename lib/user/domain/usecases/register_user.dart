@@ -1,10 +1,11 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
-import 'package:app/features/user/domain/user_repository.dart';
+import 'package:app/user/domain/entitties/user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
+
+import '../user_repository.dart';
 
 class RegisterUser implements UseCase<User, Params> {
   final UserRepository repository;

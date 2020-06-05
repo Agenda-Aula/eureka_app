@@ -1,10 +1,9 @@
+import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/logged_out.dart';
+import 'package:app/authentication/presentation/authentication_bloc.dart';
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
-import 'package:app/features/authentication/domain/usecases/is_logged_in.dart';
-import 'package:app/features/authentication/domain/usecases/logged_out.dart';
-import 'package:app/features/authentication/presentation/authentication_bloc.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
-import 'package:app/features/user/domain/usecases/get_user.dart';
+import 'package:app/user/domain/usecases/get_user.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,6 +14,7 @@ class MockUserLoggedOut extends Mock implements UserLoggedOut {}
 class MockIsUserLoggedIn extends Mock implements IsUserLoggedIn {}
 
 class MockGetUser extends Mock implements GetUser {}
+
 
 void main() {
   AuthenticationBloc bloc;

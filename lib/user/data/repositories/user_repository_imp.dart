@@ -1,10 +1,9 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/error/exceptions.dart';
-import 'package:app/features/user/data/datasource/user_data_source.dart';
-import 'package:app/features/user/data/models/user_model.dart';
-import 'package:app/features/user/data/models/user_model_to_user_mapper.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
-import 'package:app/features/user/domain/user_repository.dart';
+import 'package:app/user/data/datasource/user_data_source.dart';
+import 'package:app/user/data/models/user_model_to_user_mapper.dart';
+import 'package:app/user/domain/entitties/user.dart';
+import 'package:app/user/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class UserRepositoryImp extends UserRepository {

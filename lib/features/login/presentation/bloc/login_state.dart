@@ -94,18 +94,7 @@ class LoginState extends Equatable {
       isFailure: isFailure ?? this.isFailure,
     );
   }
-
-  @override
-  String toString() {
-    return '''LoginState {
-      isEmailValid: $isEmailValid,
-      isPasswordValid: $isPasswordValid,      
-      isSubmitting: $isSubmitting,
-      isSuccess: $isSuccess,
-      isFailure: $isFailure,
-    }''';
-  }
-
+  
   @override
   List<Object> get props =>
       [isEmailValid, isPasswordValid, isSubmitting, isSuccess, isFailure];

@@ -1,7 +1,9 @@
 import 'package:app/core/error/Failure.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
+
 
 import 'package:dartz/dartz.dart';
+
+import 'entitties/user.dart';
 
 abstract class UserRepository {
   Future<Either<Failure, User>> signUp(String email, String password);
