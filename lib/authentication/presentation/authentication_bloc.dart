@@ -3,7 +3,6 @@ import 'package:app/authentication/domain/usecases/is_logged_in.dart';
 import 'package:app/authentication/domain/usecases/logged_out.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/register/domain/entitties/user.dart';
-import 'package:app/features/register/domain/usecases/get_user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -16,16 +15,12 @@ class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final IsUserLoggedIn _isUserLoggedIn;
   final UserLoggedOut _userLoggedOut;
-  final GetUser _getUser;
 
   AuthenticationBloc(
       {@required IsUserLoggedIn isUserLoggedIn,
-      @required GetUser getUser,
       @required UserLoggedOut userLoggedOut})
       : assert(isUserLoggedIn != null),
-        assert(getUser != null),
         assert(userLoggedOut != null),
-        _getUser = getUser,
         _userLoggedOut = userLoggedOut,
         _isUserLoggedIn = isUserLoggedIn;
 
@@ -54,7 +49,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapLoggedInToState() async* {
-    final result = await _getUser.call(NoParams());
+    final result = await _isUserLoggedIn.call(NoParams());
     yield result.fold(
       (failure) => Unauthenticated(),
       (user) => Authenticated(user: user),
