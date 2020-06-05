@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/error/exceptions.dart';
-import 'package:app/features/user/data/datasource/user_data_source.dart';
-import 'package:app/features/user/data/models/user_model.dart';
-import 'package:app/features/user/data/repositories/user_repository_imp.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
+import 'package:app/features/register/data/datasource/user_data_source.dart';
+import 'package:app/features/register/data/models/user_model.dart';
+import 'package:app/features/register/data/repositories/user_repository_imp.dart';
+import 'package:app/features/register/domain/entitties/user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

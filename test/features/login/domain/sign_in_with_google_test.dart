@@ -1,7 +1,7 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/login/domain/sign_in_with_google.dart';
-import 'package:app/features/user/domain/user_repository.dart';
+import 'package:app/features/register/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

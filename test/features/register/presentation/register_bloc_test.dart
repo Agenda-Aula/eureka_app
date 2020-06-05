@@ -1,4 +1,5 @@
-import 'package:app/features/user/domain/usecases/register_user.dart';
+
+import 'package:app/features/register/domain/usecases/register_user.dart';
 import 'package:app/features/register/presentation/bloc/bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -88,13 +89,14 @@ void main() {
           isFailure: false,
           isSuccess: false);
 
-      expect('''RegisterState {
-      isEmailValid: true,
-      isPasswordValid: true,      
-      isSubmitting: false,
-      isSuccess: false,
-      isFailure: false,
-    }''', registerState.toString());
+      final registerStateExpected = RegisterState(
+          isEmailValid: true,
+          isPasswordValid: true,
+          isSubmitting: false,
+          isFailure: false,
+          isSuccess: false);
+
+      expect( registerState, registerStateExpected);
     });
   });
 

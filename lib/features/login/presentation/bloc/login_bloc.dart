@@ -1,11 +1,10 @@
 import 'dart:async';
-import 'package:app/features/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/is_logged_in.dart';
 import 'package:app/features/login/domain/sign_in_with_credentials.dart';
 import 'package:app/features/login/presentation/bloc/bloc.dart';
 import 'package:app/features/register/presentation/validator.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:rxdart/rxdart.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   SignInWithCredentials _signInWithCredentials;

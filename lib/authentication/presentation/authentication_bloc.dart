@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/logged_out.dart';
 import 'package:app/core/usecases/usecase.dart';
-import 'package:app/features/authentication/domain/usecases/is_logged_in.dart';
-import 'package:app/features/authentication/domain/usecases/logged_out.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
-import 'package:app/features/user/domain/usecases/get_user.dart';
+import 'package:app/features/register/domain/entitties/user.dart';
+import 'package:app/features/register/domain/usecases/get_user.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';

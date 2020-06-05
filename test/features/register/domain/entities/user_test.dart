@@ -1,6 +1,6 @@
 
-import 'package:app/features/user/data/models/user_model.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
+import 'package:app/features/register/data/models/user_model.dart';
+import 'package:app/features/register/domain/entitties/user.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

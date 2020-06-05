@@ -1,7 +1,7 @@
 import 'package:app/core/error/Failure.dart';
-import 'package:app/features/user/domain/entitties/user.dart';
-import 'package:app/features/user/domain/user_repository.dart';
-import 'package:app/features/user/domain/usecases/register_user.dart';
+import 'package:app/features/register/domain/entitties/user.dart';
+import 'package:app/features/register/domain/usecases/register_user.dart';
+import 'package:app/features/register/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

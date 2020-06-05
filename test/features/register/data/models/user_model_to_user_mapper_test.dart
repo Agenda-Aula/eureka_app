@@ -1,5 +1,5 @@
-import 'package:app/features/user/data/models/user_model.dart';
-import 'package:app/features/user/data/models/user_model_to_user_mapper.dart';
+import 'package:app/features/register/data/models/user_model.dart';
+import 'package:app/features/register/data/models/user_model_to_user_mapper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
