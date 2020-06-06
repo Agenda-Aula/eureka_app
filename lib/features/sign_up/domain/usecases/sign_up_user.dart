@@ -1,19 +1,20 @@
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/sign_up/domain/entitties/user.dart';
-import 'package:app/features/sign_up/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class IsUserLoggedIn implements UseCase<User, NoParams> {
+import '../user_repository.dart';
+
+class RegisterUser implements UseCase<User, Params> {
   final UserRepository repository;
 
-  IsUserLoggedIn({@required this.repository});
+  RegisterUser({@required this.repository});
 
   @override
-  Future<Either<Failure, User>> call(NoParams params) async =>
-      await repository.isLoggedIn();
+  Future<Either<Failure, User>> call(Params params) async =>
+      await repository.signUp(params.email, params.password);
 }
 
 class Params extends Equatable {

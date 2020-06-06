@@ -1,6 +1,4 @@
-
-import 'package:app/features/register/presentation/bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app/features/sign_up/presentation/bloc/register_state.dart';
 import 'package:flutter/material.dart';
 
 Widget entryEmail(TextEditingController emailController, RegisterState state) {
