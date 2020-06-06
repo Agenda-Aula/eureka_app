@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../di/injection_container.dart';
-import 'bloc/register_bloc.dart';
+import 'bloc/sign_up_bloc.dart';
 
 class RegisterPage extends StatelessWidget {
   @override

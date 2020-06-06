@@ -1,3 +1,3 @@
-export 'register_bloc.dart';
-export 'register_event.dart';
-export 'register_state.dart';
+export 'sign_up_bloc.dart';
+export 'sign_up_event.dart';
+export 'sign_up_state.dart';

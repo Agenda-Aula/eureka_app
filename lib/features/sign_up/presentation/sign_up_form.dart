@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/bloc.dart';
-import 'bloc/register_bloc.dart';
-import 'bloc/register_event.dart';
 
 class RegisterForm extends StatefulWidget {
   @override
