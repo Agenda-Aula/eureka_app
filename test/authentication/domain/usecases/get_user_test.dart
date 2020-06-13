@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 class MockUserRepository extends Mock implements UserRepository {}
 
 void main() {
-  GetUser usecase;
+  GetUser getUser;
   MockUserRepository mockRepository;
 	String email = "douglas@gmail.com";
 	String password = "12345678";
@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     mockRepository = MockUserRepository();
-    usecase = GetUser(repository: mockRepository);
+    getUser = GetUser(repository: mockRepository);
 		params = Params(email, password);
   });
 
@@ -30,7 +30,7 @@ void main() {
       when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Right(userModel));
       // act
-      final result = await usecase.call(NoParams());
+      final result = await getUser.call(NoParams());
       // assert
       expect(result, Right(userModel));
       verify(mockRepository.getAuthenticatedUser());
@@ -44,7 +44,7 @@ void main() {
       when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Right(userModel));
       // act
-      final result = await usecase.call(NoParams());
+      final result = await getUser.call(NoParams());
       // assert
       expect(result, Right(userModel));
       verify(mockRepository.getAuthenticatedUser());
@@ -55,7 +55,7 @@ void main() {
       when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Left(ServerFailure()));
       // act
-      final result = await usecase.call(NoParams());
+      final result = await getUser.call(NoParams());
       // assert
       expect(result, Left(ServerFailure()));
       verify(mockRepository.getAuthenticatedUser());

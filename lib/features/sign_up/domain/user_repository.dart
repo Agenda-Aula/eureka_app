@@ -10,8 +10,6 @@ abstract class UserRepository {
 
   Future<Either<Failure, User>> getAuthenticatedUser();
 
-  Future<Either<Failure, bool>> isAuthenticatedUser();
-
   Future<Either<Failure, void>> signOut();
 
 	Future<Either<Failure, bool>> signInWithGoogle();

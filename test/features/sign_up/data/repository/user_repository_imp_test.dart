@@ -70,30 +70,6 @@ void main() {
       expect(result, Right(user));
     });
 
-    test('should return true if user authenticated', () async {
-      // arrange
-      when(mockRegisterUserDataSource.isAuthenticatedUser())
-          .thenAnswer((_) async => true);
-      // act
-      final result = await repository.isAuthenticatedUser();
-      // assert
-      verify(mockRegisterUserDataSource.isAuthenticatedUser());
-      verifyNoMoreInteractions(mockRegisterUserDataSource);
-      expect(result, Right(true));
-    });
-
-    test('should return false if user unauthenticated', () async {
-      // arrange
-      when(mockRegisterUserDataSource.isAuthenticatedUser())
-          .thenAnswer((_) async => false);
-      // act
-      final result = await repository.isAuthenticatedUser();
-      // assert
-      verify(mockRegisterUserDataSource.isAuthenticatedUser());
-      verifyNoMoreInteractions(mockRegisterUserDataSource);
-      expect(result, Right(false));
-    });
-
     test('should return null if user is not logged in', () async {
       // arrange
       when(mockRegisterUserDataSource.getAuthenticatedUser()).thenAnswer((_) async => null);

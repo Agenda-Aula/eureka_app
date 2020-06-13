@@ -1,6 +1,7 @@
 import 'package:app/authentication/domain/usecases/is_authenticated_user.dart';
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
+import 'package:app/features/sign_up/data/models/user_model.dart';
 import 'package:app/features/sign_up/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,7 +12,6 @@ class MockUserRepository extends Mock implements UserRepository {}
 void main() {
   IsAuthenticatedUser isAuthUser;
   MockUserRepository mockRepository;
-	Params params;
 
   setUp(() {
     mockRepository = MockUserRepository();
@@ -21,37 +21,39 @@ void main() {
   group('Group', () {
     test('should return true when user  is logged', () async {
       // arrange
-      when(mockRepository.isAuthenticatedUser())
-          .thenAnswer((_) async => Right(true));
+      final userModel =
+      UserModel(email: "email", profileUrl: "url", displayName: "name");
+      when(mockRepository.getAuthenticatedUser())
+          .thenAnswer((_) async => Right(userModel));
       // act
       final result = await isAuthUser.call(NoParams());
       // assert
       expect(result, Right(true));
-      verify(mockRepository.isAuthenticatedUser());
+      verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
 
     test('should return false when user  try to logged in', () async {
       // arrange
-      when(mockRepository.isAuthenticatedUser())
-          .thenAnswer((_) async => Right(false));
+      when(mockRepository.getAuthenticatedUser())
+          .thenAnswer((_) async => Right(null));
       // act
       final result = await isAuthUser.call(NoParams());
       // assert
       expect(result, Right(false));
-      verify(mockRepository.isAuthenticatedUser());
+      verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
 
     test('should return a failure when check if user is logged in', () async {
       // arrange
-      when(mockRepository.isAuthenticatedUser())
+      when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Left(ServerFailure()));
       // act
       final result = await isAuthUser.call(NoParams());
       // assert
       expect(result, Left(ServerFailure()));
-      verify(mockRepository.isAuthenticatedUser());
+      verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
   });
