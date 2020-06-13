@@ -1,7 +1,7 @@
 import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/authentication/domain/usecases/logged_out.dart';
-import 'package:app/core/error/Failure.dart';
-import 'package:app/core/usecases/usecase.dart';
+import 'package:app/core/error/failure.dart';
+import 'package:app/core/usecases/use_case.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -9,16 +9,12 @@ import 'package:mockito/mockito.dart';
 import 'get_user_test.dart';
 
 void main() {
-  UserLoggedOut usecase;
+  UserLoggedOut userLogedOut;
   MockUserRepository mockRepository;
-  String email = "douglas@gmail.com";
-  String password = "12345678";
-  Params params;
 
   setUp(() {
     mockRepository = MockUserRepository();
-    usecase = UserLoggedOut(repository: mockRepository);
-    params = Params(email, password);
+    userLogedOut = UserLoggedOut(repository: mockRepository);
   });
 
   group('Group', () {
@@ -26,7 +22,7 @@ void main() {
       // arrange
       when(mockRepository.signOut()).thenAnswer((_) async => Right(true));
       // act
-      final result = await usecase.call(NoParams());
+      final result = await userLogedOut.call(NoParams());
       // assert
       expect(result, Right(true));
       verify(mockRepository.signOut());
@@ -36,7 +32,7 @@ void main() {
       // arrange
       when(mockRepository.signOut()).thenAnswer((_) async => Right(false));
       // act
-      final result = await usecase.call(NoParams());
+      final result = await userLogedOut.call(NoParams());
       // assert
       expect(result, Right(false));
     });
@@ -45,13 +41,9 @@ void main() {
       when(mockRepository.signOut())
           .thenAnswer((_) async => Left(ServerFailure()));
       // act
-      final result = await usecase.call(NoParams());
+      final result = await userLogedOut.call(NoParams());
       // assert
       expect(result, Left(ServerFailure()));
-    });
-
-    test('verify params property', () {
-      expect('${[email, password]}', params.props.toString());
     });
   });
 }

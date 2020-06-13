@@ -1,4 +1,4 @@
-import 'package:app/core/error/Failure.dart';
+import 'package:app/core/error/failure.dart';
 import 'package:app/features/sign_up/domain/entitties/user.dart';
 import 'package:app/features/sign_up/domain/usecases/sign_up_user.dart';
 import 'package:app/features/sign_up/domain/user_repository.dart';

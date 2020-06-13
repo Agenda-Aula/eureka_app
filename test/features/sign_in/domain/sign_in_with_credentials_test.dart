@@ -1,5 +1,5 @@
 import 'package:app/authentication/domain/usecases/get_user.dart';
-import 'package:app/core/error/Failure.dart';
+import 'package:app/core/error/failure.dart';
 import 'package:app/features/sign_in/domain/sign_in_with_credentials.dart';
 import 'package:app/features/sign_up/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';

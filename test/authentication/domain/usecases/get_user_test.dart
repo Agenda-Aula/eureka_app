@@ -1,6 +1,6 @@
 import 'package:app/authentication/domain/usecases/get_user.dart';
-import 'package:app/core/error/Failure.dart';
-import 'package:app/core/usecases/usecase.dart';
+import 'package:app/core/error/failure.dart';
+import 'package:app/core/usecases/use_case.dart';
 import 'package:app/features/sign_up/data/models/user_model.dart';
 import 'package:app/features/sign_up/domain/user_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -12,14 +12,10 @@ class MockUserRepository extends Mock implements UserRepository {}
 void main() {
   GetUser getUser;
   MockUserRepository mockRepository;
-	String email = "douglas@gmail.com";
-	String password = "12345678";
-	Params params;
 
   setUp(() {
     mockRepository = MockUserRepository();
     getUser = GetUser(repository: mockRepository);
-		params = Params(email, password);
   });
 
   group('Group', () {
@@ -61,9 +57,5 @@ void main() {
       verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
-
-		test('verify params property', () {
-			expect('${[email, password]}', params.props.toString());
-		});
   });
 }

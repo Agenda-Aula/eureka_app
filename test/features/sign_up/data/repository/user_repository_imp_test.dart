@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app/core/error/Failure.dart';
+import 'package:app/core/error/failure.dart';
 import 'package:app/core/error/exceptions.dart';
 import 'package:app/features/sign_up/data/datasource/user_data_source.dart';
 import 'package:app/features/sign_up/data/models/user_model.dart';

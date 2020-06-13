@@ -1,8 +1,8 @@
 import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/authentication/domain/usecases/logged_out.dart';
 import 'package:app/authentication/presentation/authentication_bloc.dart';
-import 'package:app/core/error/Failure.dart';
-import 'package:app/core/usecases/usecase.dart';
+import 'package:app/core/error/failure.dart';
+import 'package:app/core/usecases/use_case.dart';
 import 'package:app/features/sign_up/domain/entitties/user.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
