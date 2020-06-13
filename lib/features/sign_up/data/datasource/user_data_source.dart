@@ -32,6 +32,11 @@ class UserDataSourceImp extends UserDataSource {
   }
 
   @override
+  Future<bool> isAuthenticatedUser() {
+    return Future.value(getAuthenticatedUser() != null);
+  }
+
+  @override
   Future<void> signOut() => _firebaseAuth.signOut();
 
   @override
@@ -65,5 +70,5 @@ abstract class UserDataSource {
 
 	Future<UserModel> getAuthenticatedUser();
 
-
+  Future<bool> isAuthenticatedUser();
 }

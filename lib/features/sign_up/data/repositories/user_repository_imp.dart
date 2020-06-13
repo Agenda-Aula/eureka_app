@@ -65,9 +65,10 @@ class UserRepositoryImp extends UserRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> isAuthenticatedUser() {
+  Future<Either<Failure, bool>> isAuthenticatedUser() async {
     try {
-      return Future.value(Right(true));
+      final isAuth = await userDataSource.isAuthenticatedUser();
+      return Right(isAuth);
     } on ServerException {
       return Future.value(Left(ServerFailure()));
     }
