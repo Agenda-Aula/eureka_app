@@ -1,4 +1,4 @@
-import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/authentication/domain/usecases/logged_out.dart';
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'is_logged_in_test.dart';
+import 'get_user_test.dart';
 
 void main() {
   UserLoggedOut usecase;

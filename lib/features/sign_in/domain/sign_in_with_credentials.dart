@@ -1,4 +1,4 @@
-import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/sign_up/domain/user_repository.dart';

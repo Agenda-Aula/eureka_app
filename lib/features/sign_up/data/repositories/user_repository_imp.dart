@@ -23,9 +23,9 @@ class UserRepositoryImp extends UserRepository {
   }
 
   @override
-  Future<Either<Failure, User>> isLoggedIn() async {
+  Future<Either<Failure, User>> getAuthenticatedUser() async {
     try {
-      final result = await userDataSource.isSignIn();
+      final result = await userDataSource.getAuthenticatedUser();
       if (result != null) return Right(mapper.map(result));
     } on ServerException {
       return Left(ServerFailure());
@@ -36,7 +36,7 @@ class UserRepositoryImp extends UserRepository {
   @override
   Future<Either<Failure, bool>> signOut() async {
     userDataSource.signOut();
-    final result = await userDataSource.isSignIn();
+    final result = await userDataSource.getAuthenticatedUser();
     if (result != null)
       return Right(true);
     else

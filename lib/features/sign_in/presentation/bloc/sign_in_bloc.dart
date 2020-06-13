@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/features/sign_in/domain/sign_in_with_credentials.dart';
 import 'package:app/features/sign_up/presentation/validator.dart';
 import 'package:bloc/bloc.dart';

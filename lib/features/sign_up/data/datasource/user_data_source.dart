@@ -20,7 +20,7 @@ class UserDataSourceImp extends UserDataSource {
   }
 
   @override
-  Future<UserModel> isSignIn() async {
+  Future<UserModel> getAuthenticatedUser() async {
     final currentUser = await _firebaseAuth.currentUser();
     if (currentUser == null) {
       return null;
@@ -63,7 +63,7 @@ abstract class UserDataSource {
 
 	Future<void> signOut();
 
-	Future<UserModel> isSignIn();
+	Future<UserModel> getAuthenticatedUser();
 
 
 }

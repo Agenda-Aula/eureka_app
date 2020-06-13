@@ -1,4 +1,4 @@
-import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/core/error/Failure.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/sign_up/data/models/user_model.dart';
@@ -10,7 +10,7 @@ import 'package:mockito/mockito.dart';
 class MockUserRepository extends Mock implements UserRepository {}
 
 void main() {
-  IsUserLoggedIn usecase;
+  GetUser usecase;
   MockUserRepository mockRepository;
 	String email = "douglas@gmail.com";
 	String password = "12345678";
@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     mockRepository = MockUserRepository();
-    usecase = IsUserLoggedIn(repository: mockRepository);
+    usecase = GetUser(repository: mockRepository);
 		params = Params(email, password);
   });
 
@@ -27,13 +27,13 @@ void main() {
       // arrange
       final userModel =
           UserModel(email: "email", profileUrl: "url", displayName: "name");
-      when(mockRepository.isLoggedIn())
+      when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Right(userModel));
       // act
       final result = await usecase.call(NoParams());
       // assert
       expect(result, Right(userModel));
-      verify(mockRepository.isLoggedIn());
+      verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
 
@@ -41,24 +41,24 @@ void main() {
       // arrange
       final userModel =
           UserModel(email: "email", profileUrl: "url", displayName: "name");
-      when(mockRepository.isLoggedIn())
+      when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Right(userModel));
       // act
       final result = await usecase.call(NoParams());
       // assert
       expect(result, Right(userModel));
-      verify(mockRepository.isLoggedIn());
+      verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
     test('should return a failure when check if user is logged in', () async {
       // arrange
-      when(mockRepository.isLoggedIn())
+      when(mockRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Left(ServerFailure()));
       // act
       final result = await usecase.call(NoParams());
       // assert
       expect(result, Left(ServerFailure()));
-      verify(mockRepository.isLoggedIn());
+      verify(mockRepository.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRepository);
     });
 

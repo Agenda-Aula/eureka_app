@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app/authentication/domain/usecases/is_logged_in.dart';
+import 'package:app/authentication/domain/usecases/get_user.dart';
 import 'package:app/authentication/domain/usecases/logged_out.dart';
 import 'package:app/core/usecases/usecase.dart';
 import 'package:app/features/sign_up/domain/entitties/user.dart';
@@ -13,16 +13,16 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final IsUserLoggedIn _isUserLoggedIn;
+  final GetUser _getUser;
   final UserLoggedOut _userLoggedOut;
 
   AuthenticationBloc(
-      {@required IsUserLoggedIn isUserLoggedIn,
+      {@required GetUser isGetUser,
       @required UserLoggedOut userLoggedOut})
-      : assert(isUserLoggedIn != null),
+      : assert(isGetUser != null),
         assert(userLoggedOut != null),
         _userLoggedOut = userLoggedOut,
-        _isUserLoggedIn = isUserLoggedIn;
+        _getUser = isGetUser;
 
   @override
   AuthenticationState get initialState => Uninitialized();
@@ -41,7 +41,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapAppStartedToState() async* {
-    final result = await _isUserLoggedIn.call(NoParams());
+    final result = await _getUser.call(NoParams());
     yield result.fold(
       (failure) => Unauthenticated(),
       (user) => Authenticated(user: user),
@@ -49,7 +49,7 @@ class AuthenticationBloc
   }
 
   Stream<AuthenticationState> _mapLoggedInToState() async* {
-    final result = await _isUserLoggedIn.call(NoParams());
+    final result = await _getUser.call(NoParams());
     yield result.fold(
       (failure) => Unauthenticated(),
       (user) => Authenticated(user: user),

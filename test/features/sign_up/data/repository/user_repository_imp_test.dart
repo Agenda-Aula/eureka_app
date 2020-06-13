@@ -60,46 +60,46 @@ void main() {
 
     test('should return an user if it is logged in', () async {
       // arrange
-      when(mockRegisterUserDataSource.isSignIn())
+      when(mockRegisterUserDataSource.getAuthenticatedUser())
           .thenAnswer((_) async => userModel);
       // act
-      final result = await repository.isLoggedIn();
+      final result = await repository.getAuthenticatedUser();
       // assert
-      verify(mockRegisterUserDataSource.isSignIn());
+      verify(mockRegisterUserDataSource.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRegisterUserDataSource);
       expect(result, Right(user));
     });
 
     test('should return null if user is not logged in', () async {
       // arrange
-      when(mockRegisterUserDataSource.isSignIn()).thenAnswer((_) async => null);
+      when(mockRegisterUserDataSource.getAuthenticatedUser()).thenAnswer((_) async => null);
       // act
-      final result = await repository.isLoggedIn();
+      final result = await repository.getAuthenticatedUser();
       // assert
-      verify(mockRegisterUserDataSource.isSignIn());
+      verify(mockRegisterUserDataSource.getAuthenticatedUser());
       verifyNoMoreInteractions(mockRegisterUserDataSource);
       expect(result, Right(null));
     });
 
     test('should return a failure after creating account', () async {
       // arrange
-      when(mockRegisterUserDataSource.isSignIn()).thenThrow(ServerException());
+      when(mockRegisterUserDataSource.getAuthenticatedUser()).thenThrow(ServerException());
       // act
-      final result = await repository.isLoggedIn();
+      final result = await repository.getAuthenticatedUser();
       // assert
-      verify(mockRegisterUserDataSource.isSignIn());
+      verify(mockRegisterUserDataSource.getAuthenticatedUser());
       expect(result, Left(ServerFailure()));
     });
 
     test('should sign out user', () async {
       // arrange
-      when(mockRegisterUserDataSource.isSignIn())
+      when(mockRegisterUserDataSource.getAuthenticatedUser())
           .thenAnswer((_) async => userModel);
       when(mockRegisterUserDataSource.signOut()).thenAnswer((_) async => true);
       // act
       final result = await repository.signOut();
       // assert
-      verify(mockRegisterUserDataSource.isSignIn());
+      verify(mockRegisterUserDataSource.getAuthenticatedUser());
       verify(mockRegisterUserDataSource.signOut());
 
       expect(result, Right(true));

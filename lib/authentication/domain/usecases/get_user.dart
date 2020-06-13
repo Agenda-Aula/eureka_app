@@ -6,14 +6,14 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class IsUserLoggedIn implements UseCase<User, NoParams> {
+class GetUser implements UseCase<User, NoParams> {
   final UserRepository repository;
 
-  IsUserLoggedIn({@required this.repository});
+  GetUser({@required this.repository});
 
   @override
   Future<Either<Failure, User>> call(NoParams params) async =>
-      await repository.isLoggedIn();
+      await repository.getAuthenticatedUser();
 }
 
 class Params extends Equatable {
