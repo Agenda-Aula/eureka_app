@@ -63,4 +63,13 @@ class UserRepositoryImp extends UserRepository {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> isAuthenticatedUser() {
+    try {
+      return Future.value(Right(true));
+    } on ServerException {
+      return Future.value(Left(ServerFailure()));
+    }
+  }
 }

@@ -17,12 +17,12 @@ class AuthenticationBloc
   final UserLoggedOut _userLoggedOut;
 
   AuthenticationBloc(
-      {@required GetUser isGetUser,
+      {@required GetUser getUser,
       @required UserLoggedOut userLoggedOut})
-      : assert(isGetUser != null),
+      : assert(getUser != null),
         assert(userLoggedOut != null),
         _userLoggedOut = userLoggedOut,
-        _getUser = isGetUser;
+        _getUser = getUser;
 
   @override
   AuthenticationState get initialState => Uninitialized();

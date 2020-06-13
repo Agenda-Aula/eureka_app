@@ -24,7 +24,7 @@ void main() {
     mockGetUser = MockGetUser();
 
     bloc = AuthenticationBloc(
-        isGetUser: mockGetUser,
+        getUser: mockGetUser,
         userLoggedOut: mockUserLoggedOut);
   });
 

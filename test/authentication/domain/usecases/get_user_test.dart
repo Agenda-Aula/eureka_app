@@ -23,7 +23,7 @@ void main() {
   });
 
   group('Group', () {
-    test('should return true when user  is logged', () async {
+    test('should return user when user is logged', () async {
       // arrange
       final userModel =
           UserModel(email: "email", profileUrl: "url", displayName: "name");
@@ -37,7 +37,7 @@ void main() {
       verifyNoMoreInteractions(mockRepository);
     });
 
-    test('should return false when user  try to logged in', () async {
+    test('should not return user when user try to logged in', () async {
       // arrange
       final userModel =
           UserModel(email: "email", profileUrl: "url", displayName: "name");
