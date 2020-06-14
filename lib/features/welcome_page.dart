@@ -1,9 +1,7 @@
-import 'package:app/features/register/presentation/register_page.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:app/features/authentication/presentation/view/sign_in/sign_in_page.dart';
+import 'package:app/features/authentication/presentation/view/sign_up/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'authentication/sign_in_page.dart';
 
 class WelcomePage extends StatefulWidget {
   WelcomePage({Key key, this.title}) : super(key: key);
