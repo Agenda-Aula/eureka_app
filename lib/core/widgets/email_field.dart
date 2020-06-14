@@ -1,4 +1,4 @@
-import 'package:app/features/sign_up/presentation/bloc/bloc.dart';
+import 'package:app/features/authentication/presentation/bloc/sign_up/bloc.dart';
 import 'package:flutter/material.dart';
 
 Widget entryEmail(TextEditingController emailController, RegisterState state) {

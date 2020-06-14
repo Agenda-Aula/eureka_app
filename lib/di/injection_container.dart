@@ -1,8 +1,8 @@
-import 'package:app/features/sign_up/data/datasource/user_data_source.dart';
-import 'package:app/features/sign_up/data/repositories/user_repository_imp.dart';
-import 'package:app/features/sign_up/domain/usecases/sign_up_user.dart';
-import 'package:app/features/sign_up/domain/user_repository.dart';
-import 'package:app/features/sign_up/presentation/bloc/bloc.dart';
+import 'package:app/features/authentication/data/data_source/user_data_source.dart';
+import 'package:app/features/authentication/data/repositories/user_repository_imp.dart';
+import 'package:app/features/authentication/domain/usecases/sign_up_user.dart';
+import 'package:app/features/authentication/domain/user_repository.dart';
+import 'package:app/features/authentication/presentation/bloc/sign_up/bloc.dart';
 
 import 'package:get_it/get_it.dart';
 
