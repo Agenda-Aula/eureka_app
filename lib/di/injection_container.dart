@@ -11,7 +11,6 @@ final sl = GetIt.instance;
 Future<void> init() async {
   // Blocs
   sl.registerFactory(() => RegisterBloc(registerUser: sl()));
-  //teset
   // Use Cases
   sl.registerLazySingleton(() => RegisterUser(repository: sl()));
 
