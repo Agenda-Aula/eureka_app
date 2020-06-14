@@ -1,5 +1,5 @@
 # app
-[![Coverage Status](https://coveralls.io/repos/github/douglasalipio/eureka_app/badge.svg)](https://coveralls.io/github/douglasalipio/eureka_app)
+[![Coverage Status](https://coveralls.io/repos/github/Agenda-Aula/eureka_app/badge.svg?branch=master)](https://coveralls.io/github/Agenda-Aula/eureka_app?branch=master)
 [![Build Status](https://travis-ci.com/douglasalipio/eureka_app.svg?branch=master)](https://travis-ci.com/douglasalipio/eureka_app)
 
 A new Flutter application.
