@@ -2,6 +2,7 @@ import 'package:app/core/widgets/password_field.dart';
 import 'package:app/core/widgets/email_field.dart';
 import 'package:app/features/authentication/presentation/view/sign_up/widgets/register_button.dart';
 import 'package:app/features/authentication/presentation/view/sign_up/widgets/register_title.dart';
+import 'package:app/features/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,7 +53,7 @@ class _RegisterFormState extends State<RegisterForm> {
             );
         }
         if (state.isSuccess) {
-          //todo
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),),);
         }
 
         if (state.isFailure) {
