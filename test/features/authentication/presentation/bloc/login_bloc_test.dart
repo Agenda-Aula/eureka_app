@@ -1,19 +1,19 @@
 
-import 'package:app/features/authentication/domain/usecases/sign_in_with_credentials.dart';
+import 'package:app/features/authentication/domain/usecases/authenticate_with_credentials.dart';
 import 'package:app/features/authentication/presentation/bloc/sign_in/sign_in.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockSignInWithCredentials extends Mock implements SignInWithCredentials {}
+class MockSignInWithCredentials extends Mock implements AuthenticateWithCredentials {}
 
 void main() {
 	LoginBloc loginBloc;
-	SignInWithCredentials mockSignInWithCredentials;
+	AuthenticateWithCredentials mockAuthenticateWithCredentials;
 
 	setUp(() {
-		mockSignInWithCredentials = MockSignInWithCredentials();
-		loginBloc = LoginBloc(signInWithCredentials: mockSignInWithCredentials);
+		mockAuthenticateWithCredentials = MockSignInWithCredentials();
+		loginBloc = LoginBloc(signInWithCredentials: mockAuthenticateWithCredentials);
 
 	});
 

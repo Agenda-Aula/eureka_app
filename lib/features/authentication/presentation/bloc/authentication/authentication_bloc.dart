@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:app/core/usecases/use_case.dart';
-import 'package:app/features/authentication/domain/entities/user.dart';
-import 'package:app/features/authentication/domain/usecases/get_user.dart';
-import 'package:app/features/authentication/domain/usecases/logged_out.dart';
+import 'package:app/features/authentication/domain/entities/auth.dart';
+import 'package:app/features/authentication/domain/usecases/get_authenticate_user.dart';
+import 'package:app/features/authentication/domain/usecases/unauthorize_session.dart';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
@@ -13,16 +13,16 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-  final GetUser _getUser;
-  final UserLoggedOut _userLoggedOut;
+  final GetAuthentication _getUser;
+  final UnauthorizeSession _unauthorizeSession;
 
   AuthenticationBloc(
-      {@required GetUser getUser,
-      @required UserLoggedOut userLoggedOut})
-      : assert(getUser != null),
-        assert(userLoggedOut != null),
-        _userLoggedOut = userLoggedOut,
-        _getUser = getUser;
+      {@required GetAuthentication getAuthorization,
+      @required UnauthorizeSession unauthorizeSession})
+      : assert(getAuthorization != null),
+        assert(unauthorizeSession != null),
+        _unauthorizeSession = unauthorizeSession,
+        _getUser = getAuthorization;
 
   @override
   AuthenticationState get initialState => Uninitialized();
@@ -44,7 +44,7 @@ class AuthenticationBloc
     final result = await _getUser.call(NoParams());
     yield result.fold(
       (failure) => Unauthenticated(),
-      (user) => Authenticated(user: user),
+      (auth) => Authenticated(user: auth),
     );
   }
 
@@ -52,12 +52,12 @@ class AuthenticationBloc
     final result = await _getUser.call(NoParams());
     yield result.fold(
       (failure) => Unauthenticated(),
-      (user) => Authenticated(user: user),
+      (auth) => Authenticated(user: auth),
     );
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {
     yield Unauthenticated();
-    _userLoggedOut.call(NoParams());
+    _unauthorizeSession.call(NoParams());
   }
 }

@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:app/core/error/failure.dart';
 import 'package:app/core/error/exceptions.dart';
-import 'package:app/features/authentication/data/data_source/user_data_source.dart';
-import 'package:app/features/authentication/data/models/user_model.dart';
-import 'package:app/features/authentication/data/repositories/user_repository_imp.dart';
-import 'package:app/features/authentication/domain/entities/user.dart';
+import 'package:app/features/authentication/data/models/auth_model.dart';
+import 'package:app/features/authentication/data/repositories/authentication_repository_imp.dart';
+import 'package:app/features/authentication/data/service/authentication_service.dart';
+import 'package:app/features/authentication/domain/entities/auth.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockRegisterUserDataSource extends Mock implements UserDataSourceImp {}
+class MockRegisterUserDataSource extends Mock implements AuthenticationServiceImp {}
 
 class FutureCallbackMock extends Mock implements Function {
   Future<void> call();
@@ -23,15 +23,15 @@ void main() {
   String displayName = "Douglas Mesquita";
   String profileUrl = "http://mypic.com";
   String password = "1234567";
-  UserModel userModel;
-  User user;
+  AuthModel userModel;
+  Auth user;
 
   setUp(() {
     mockRegisterUserDataSource = MockRegisterUserDataSource();
-    repository = UserRepositoryImp(userDataSource: mockRegisterUserDataSource);
-    userModel = UserModel(
+    repository = UserRepositoryImp(authenticationService: mockRegisterUserDataSource);
+    userModel = AuthModel(
         email: email, displayName: displayName, profileUrl: profileUrl);
-    user = User(email, displayName, profileUrl);
+    user = Auth(email, displayName, profileUrl);
   });
 
   group('User data source tests', () {
@@ -40,7 +40,7 @@ void main() {
       when(mockRegisterUserDataSource.signUp(any, any))
           .thenAnswer((_) async => userModel);
       // act
-      final result = await repository.signUp(email, displayName);
+      final result = await repository.registerWithCredentials(email, displayName);
       // assert
       verify(mockRegisterUserDataSource.signUp(email, displayName));
       verifyNoMoreInteractions(mockRegisterUserDataSource);
@@ -52,7 +52,7 @@ void main() {
       when(mockRegisterUserDataSource.signUp(any, any))
           .thenThrow(ServerException());
       // act
-      final result = await repository.signUp(email, displayName);
+      final result = await repository.registerWithCredentials(email, displayName);
       // assert
       verify(mockRegisterUserDataSource.signUp(email, displayName));
       expect(result, Left(ServerFailure()));
@@ -97,7 +97,7 @@ void main() {
           .thenAnswer((_) async => userModel);
       when(mockRegisterUserDataSource.signOut()).thenAnswer((_) async => true);
       // act
-      final result = await repository.signOut();
+      final result = await repository.unauthorizeSession();
       // assert
       verify(mockRegisterUserDataSource.getAuthenticatedUser());
       verify(mockRegisterUserDataSource.signOut());
@@ -110,7 +110,7 @@ void main() {
       when(mockRegisterUserDataSource.signOut())
           .thenAnswer((_) async => Right(false));
       // act
-      final result = await repository.signOut();
+      final result = await repository.unauthorizeSession();
       // assert
       verify(mockRegisterUserDataSource.signOut());
 
@@ -122,7 +122,7 @@ void main() {
       when(mockRegisterUserDataSource.signInWithCredentials(any, any))
           .thenAnswer((_) async => Right(true));
       // act
-      final result = await repository.signInWithCredentials(email, password);
+      final result = await repository.authenticateWithCredentials(email, password);
       // assert
       verify(mockRegisterUserDataSource.signInWithCredentials(email, password));
       expect(result, Right((true)));
@@ -133,7 +133,7 @@ void main() {
       when(mockRegisterUserDataSource.signInWithCredentials(email, password))
           .thenThrow(ServerException());
       // act
-      final result = await repository.signInWithCredentials(email, password);
+      final result = await repository.authenticateWithCredentials(email, password);
       // assert
       verify(mockRegisterUserDataSource.signInWithCredentials(email, password));
       expect(result, Left(ServerFailure()));
@@ -144,7 +144,7 @@ void main() {
       when(mockRegisterUserDataSource.signInWithGoogle())
           .thenAnswer((_) async => Right(true));
       // act
-      final result = await repository.signInWithGoogle();
+      final result = await repository.authenticateWithGoogle();
       // assert
       verify(mockRegisterUserDataSource.signInWithGoogle());
       expect(result, Right((true)));
@@ -155,7 +155,7 @@ void main() {
       when(mockRegisterUserDataSource.signInWithGoogle())
           .thenThrow(ServerException());
       // act
-      final result = await repository.signInWithGoogle();
+      final result = await repository.authenticateWithGoogle();
       // assert
       verify(mockRegisterUserDataSource.signInWithGoogle());
       expect(result, Left(ServerFailure()));

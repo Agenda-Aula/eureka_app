@@ -1,15 +1,15 @@
 import 'dart:async';
-import 'package:app/features/authentication/domain/usecases/sign_in_with_credentials.dart';
+import 'package:app/features/authentication/domain/usecases/authenticate_with_credentials.dart';
 import 'package:app/features/authentication/presentation/view/sign_up/validator.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'sign_in.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  SignInWithCredentials _signInWithCredentials;
+  AuthenticateWithCredentials _signInWithCredentials;
 
   LoginBloc({
-    @required SignInWithCredentials signInWithCredentials,
+    @required AuthenticateWithCredentials signInWithCredentials,
   })  : assert(signInWithCredentials != null),
         _signInWithCredentials = signInWithCredentials;
 

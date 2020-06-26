@@ -1,6 +1,7 @@
 import 'package:app/core/widgets/bezierContainer.dart';
 import 'package:app/di/injection_container.dart';
 import 'package:app/features/authentication/presentation/bloc/sign_up/bloc.dart';
+import 'package:app/features/authentication/presentation/view/authentication_form.dart';
 import 'package:app/features/authentication/presentation/view/sign_up/sign_up_form.dart';
 import 'package:app/features/authentication/presentation/view/sign_up/widgets/register_account_label.dart';
 import 'package:app/features/authentication/presentation/view/sign_up/widgets/register_back_button.dart';
@@ -18,7 +19,7 @@ class RegisterPage extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           child: Stack(
             children: <Widget>[
-              RegisterForm(),
+              AuthenticationForm(),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: loginAccountLabelWidget(context),

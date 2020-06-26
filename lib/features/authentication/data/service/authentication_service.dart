@@ -1,31 +1,31 @@
-import 'package:app/features/authentication/data/models/user_model.dart';
+import 'package:app/features/authentication/data/models/auth_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class UserDataSourceImp extends UserDataSource {
+class AuthenticationServiceImp extends AuthenticationService {
 
   final _firebaseAuth = FirebaseAuth.instance;
   final _googleSignIn = GoogleSignIn();
 
   @override
-  Future<UserModel> signUp(String email, String password) async {
-    final result = await _firebaseAuth.createUserWithEmailAndPassword(
+  Future<AuthModel> signUp(String email, String password) async {
+    final authResult = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email, password: password);
 
-    return UserModel(
-      email: result.user.email,
-      profileUrl: result.user.photoUrl,
-      displayName: result.user.displayName,
+    return AuthModel(
+      email: authResult.user.email,
+      profileUrl: authResult.user.photoUrl,
+      displayName: authResult.user.displayName,
     );
   }
 
   @override
-  Future<UserModel> getAuthenticatedUser() async {
+  Future<AuthModel> getAuthenticatedUser() async {
     final currentUser = await _firebaseAuth.currentUser();
     if (currentUser == null) {
       return null;
     }
-    return UserModel(
+    return AuthModel(
         email: currentUser.email,
         profileUrl: currentUser.photoUrl,
         displayName: currentUser.displayName);
@@ -54,8 +54,8 @@ class UserDataSourceImp extends UserDataSource {
 	}
 }
 
-abstract class UserDataSource {
-	Future<UserModel> signUp(String email, String password);
+abstract class AuthenticationService {
+	Future<AuthModel> signUp(String email, String password);
 
 	Future<void> signInWithGoogle();
 
@@ -63,5 +63,5 @@ abstract class UserDataSource {
 
 	Future<void> signOut();
 
-	Future<UserModel> getAuthenticatedUser();
+	Future<AuthModel> getAuthenticatedUser();
 }

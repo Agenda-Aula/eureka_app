@@ -1,61 +1,60 @@
 import 'package:app/core/error/failure.dart';
 import 'package:app/core/usecases/use_case.dart';
-import 'package:app/features/authentication/data/models/user_model.dart';
-import 'package:app/features/authentication/domain/usecases/get_user.dart';
-import 'package:app/features/authentication/domain/user_repository.dart';
+import 'package:app/features/authentication/data/models/auth_model.dart';
+import 'package:app/features/authentication/domain/usecases/get_authenticate_user.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockUserRepository extends Mock implements UserRepository {}
+import 'mock_authentication_repository.dart';
 
 void main() {
-  GetUser getUser;
-  MockUserRepository mockRepository;
+  GetAuthentication getUser;
+  MockAuthenticationRepository mockAuthRepository;
 
   setUp(() {
-    mockRepository = MockUserRepository();
-    getUser = GetUser(repository: mockRepository);
+    mockAuthRepository = MockAuthenticationRepository();
+    getUser = GetAuthentication(repository: mockAuthRepository);
   });
 
   group('Group', () {
     test('should return user when user is logged', () async {
       // arrange
       final userModel =
-          UserModel(email: "email", profileUrl: "url", displayName: "name");
-      when(mockRepository.getAuthenticatedUser())
+          AuthModel(email: "email", profileUrl: "url", displayName: "name");
+      when(mockAuthRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Right(userModel));
       // act
       final result = await getUser.call(NoParams());
       // assert
       expect(result, Right(userModel));
-      verify(mockRepository.getAuthenticatedUser());
-      verifyNoMoreInteractions(mockRepository);
+      verify(mockAuthRepository.getAuthenticatedUser());
+      verifyNoMoreInteractions(mockAuthRepository);
     });
 
     test('should not return user when user try to logged in', () async {
       // arrange
       final userModel =
-          UserModel(email: "email", profileUrl: "url", displayName: "name");
-      when(mockRepository.getAuthenticatedUser())
+          AuthModel(email: "email", profileUrl: "url", displayName: "name");
+      when(mockAuthRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Right(userModel));
       // act
       final result = await getUser.call(NoParams());
       // assert
       expect(result, Right(userModel));
-      verify(mockRepository.getAuthenticatedUser());
-      verifyNoMoreInteractions(mockRepository);
+      verify(mockAuthRepository.getAuthenticatedUser());
+      verifyNoMoreInteractions(mockAuthRepository);
     });
     test('should return a failure when check if user is logged in', () async {
       // arrange
-      when(mockRepository.getAuthenticatedUser())
+      when(mockAuthRepository.getAuthenticatedUser())
           .thenAnswer((_) async => Left(ServerFailure()));
       // act
       final result = await getUser.call(NoParams());
       // assert
       expect(result, Left(ServerFailure()));
-      verify(mockRepository.getAuthenticatedUser());
-      verifyNoMoreInteractions(mockRepository);
+      verify(mockAuthRepository.getAuthenticatedUser());
+      verifyNoMoreInteractions(mockAuthRepository);
     });
   });
 }

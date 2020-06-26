@@ -1,11 +1,11 @@
-import 'package:app/features/authentication/domain/usecases/sign_up_user.dart';
+import 'package:app/features/authentication/domain/usecases/register_with_credentials.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../view/sign_up/validator.dart';
 import 'bloc.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
-  final RegisterUser registerUser;
+  final RegisterWithCredentials registerUser;
 
   RegisterBloc({@required this.registerUser}) : assert(registerUser != null);
 

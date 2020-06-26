@@ -1,19 +1,19 @@
 
-import 'package:app/features/authentication/domain/entities/user.dart';
+import 'package:app/features/authentication/domain/entities/auth.dart';
 import 'package:flutter/foundation.dart';
 
-class UserModel extends User {
+class AuthModel extends Auth {
   final String email;
   final String profileUrl;
   final String displayName;
 
-  UserModel(
+  AuthModel(
       {@required this.email,
       @required this.profileUrl,
       @required this.displayName})
       : super(email, displayName, profileUrl);
 }
 
-extension UserModelMapper on UserModel {
-  User get mapper => User(this.email, this.displayName, this.profileUrl);
+extension UserModelMapper on AuthModel {
+  Auth get mapper => Auth(this.email, this.displayName, this.profileUrl);
 }

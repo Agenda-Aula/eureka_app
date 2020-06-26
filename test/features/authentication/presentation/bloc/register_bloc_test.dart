@@ -1,10 +1,10 @@
-import 'package:app/features/authentication/domain/usecases/sign_up_user.dart';
+import 'package:app/features/authentication/domain/usecases/register_with_credentials.dart';
 import 'package:app/features/authentication/presentation/bloc/sign_up/bloc.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-class MockRegisterUser extends Mock implements RegisterUser {}
+class MockRegisterUser extends Mock implements RegisterWithCredentials {}
 
 class MockRegisterBloc extends MockBloc<RegisterEvent, int>
     implements RegisterBloc {}
